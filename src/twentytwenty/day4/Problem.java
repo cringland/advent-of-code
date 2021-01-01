@@ -3,11 +3,11 @@ package twentytwenty.day4;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import common.Util;
 
@@ -26,33 +26,20 @@ public class Problem {
     );
 
     public static void main(String[] args) throws IOException {
-        List<List<String>> groupedStrings = new ArrayList<>();
-        groupedStrings.add(new ArrayList<>());
-        Files.readAllLines(Paths.get("src/twentytwenty/day4/input"))
-                .forEach((str) -> {
-                    if (str.isEmpty()) {
-                        groupedStrings.add(new ArrayList<>());
-                    } else {
-                        groupedStrings.get(groupedStrings.size() - 1).addAll(List.of(str.toLowerCase().split(" ")));
-                    }
-                });
-
-        var hasRequiredFields = groupedStrings.stream()
-                .map(list -> list.stream().collect(Collectors.toMap(
-                        s -> s.split(":")[0],
-                        s -> s.split(":")[1])
-                ))
+        var withRequiredFields = Stream.of(Files.readString(Paths.get("src/twentytwenty/day4/input")).split("\n\n"))
+                .map(s -> Stream.of(s.split("[ \\n]"))
+                        .map(field -> field.split(":"))
+                        .collect(Collectors.toMap(arr -> arr[0], arr -> arr[1])))
                 .filter(Problem::hasRequiredFields)
                 .collect(Collectors.toList());
 
-        var reqFieldCount = hasRequiredFields.size();
+        var reqFieldCount = withRequiredFields.size();
         System.out.println("Problem 1: Valid passports = " + reqFieldCount);
         Util.assertEquals(190, reqFieldCount);
-        
-        var validPassports = hasRequiredFields.stream().filter(Problem::isValid).count();
 
-        System.out.println("Problem 2: Valid passports = " + validPassports);
-        Util.assertEquals(121L, validPassports);
+        var validPassportCount = withRequiredFields.stream().filter(Problem::isValid).count();
+        System.out.println("Problem 2: Valid passports = " + validPassportCount);
+        Util.assertEquals(121L, validPassportCount);
     }
 
     private static boolean hasRequiredFields(Map<String, String> passport) {

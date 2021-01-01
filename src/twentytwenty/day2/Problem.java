@@ -3,36 +3,57 @@ package twentytwenty.day2;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.stream.Collectors;
 
+import common.StringUtil;
 import common.Util;
+import common.model.Range;
 
 public class Problem {
 
     //https://adventofcode.com/2020/day/2
     public static void main(String[] args) throws IOException {
-        long problem1 = Files.readAllLines(Paths.get("src/twentytwenty/day2/input")).stream()
-                .filter(input -> {
-                    int lowerBound = Integer.valueOf(input.split("-")[0]);
-                    int upperBound = Integer.valueOf(input.split("-")[1].split(" ")[0]);
-                    String requiredChar = input.split(" ")[1].split(":")[0];
-                    String password = input.substring(7);
-                    int count = password.length() - password.replaceAll(requiredChar, "").length();
-                    return count >= lowerBound && count <= upperBound;
-                }).count();
+        var passwords = Files.readAllLines(Paths.get("src/twentytwenty/day2/input")).stream()
+                .map(Password::new)
+                .collect(Collectors.toList());
 
-        long problem2 = Files.readAllLines(Paths.get("src/twentytwenty/day2/input")).stream()
-                .filter(input -> {
-                    int pos1 = Integer.valueOf(input.split("-")[0]) - 1;
-                    int pos2 = Integer.valueOf(input.split("-")[1].split(" ")[0]) - 1;
-                    String requiredChar = input.split(" ")[1].split(":")[0];
-                    String password = input.split(" ")[2];
-                    return requiredChar.equals(String.valueOf(password.charAt(pos1)))
-                            ^ requiredChar.equals(String.valueOf(password.charAt(pos2)));
-                }).count();
+        var problem1 = passwords.stream()
+                .filter(Password::p1Test)
+                .count();
+
+        long problem2 = passwords.stream()
+                .filter(Password::p2Test)
+                .count();
+
         System.out.println("Problem 1: Number of valid Passwords: " + problem1);
         Util.assertEquals(456L, problem1);
         System.out.println("Problem 2: Number of valid Passwords: " + problem2);
         Util.assertEquals(308L, problem2);
+    }
+}
 
+class Password {
+
+    private Range range;
+    private String ch;
+    private String password;
+
+    public Password(String input) {
+        var nums = StringUtil.allNums(input);
+        range = Range.of(nums.get(0), nums.get(1));
+        ch = StringUtil.findFirst("(.)(?=:)", input);
+        password = StringUtil.findFirst("(\\w+)$", input);
+    }
+
+    public boolean p1Test() {
+        long count = password.length() - password.replaceAll(ch, "").length();
+        return range.testInclusive(count);
+    }
+
+    public boolean p2Test() {
+        var pos1 = range.lowest().intValue() - 1;
+        var pos2 = range.highest().intValue() - 1;
+        return ch.equals(password.substring(pos1, pos1 + 1))
+                ^ ch.equals(password.substring(pos2, pos2 + 1));
     }
 }

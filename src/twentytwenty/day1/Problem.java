@@ -15,7 +15,7 @@ public class Problem {
                 .map(Integer::valueOf)
                 .sorted()
                 .collect(Collectors.toList());
-
+            
         for (int i = 0, j = input.size() - 1; i < j; ) {
             final int in1 = input.get(i), in2 = input.get(j);
             int sum = in1 + in2;
