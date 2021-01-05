@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import common.Util;
 import common.model.Range;
 
 public class Problem {
@@ -83,14 +84,15 @@ public class Problem {
 
         long problem2Product = 1L;
         for (int i = 0; i < indexToMatches.size(); i++) {
-            System.out.println(indexToMatches.get(i) + ": " + myTicket.get(i));
             if (indexToMatches.get(i).get(0).startsWith("departure")) {
                 problem2Product *= myTicket.get(i);
             }
         }
 
         System.out.println("Problem 1 Answer is: " + p1ErrRate);
+        Util.assertEquals(21081L, p1ErrRate);
         System.out.println("Problem 2 Answer is: " + problem2Product);
+        Util.assertEquals(314360510573L, problem2Product);
     }
 
     private static List<Long> ticket(String ticket) {

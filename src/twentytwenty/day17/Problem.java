@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import common.Util;
+
 public class Problem {
 
     //https://adventofcode.com/2020/day/17
@@ -33,7 +35,9 @@ public class Problem {
         }
 
         System.out.println("Problem 1 Answer is: " + grid3.activeCount());
+        Util.assertEquals(263L, grid3.activeCount());
         System.out.println("Problem 2 Answer is: " + grid4.activeCount());
+        Util.assertEquals(1680L, grid4.activeCount());
     }
 }
 
@@ -175,13 +179,6 @@ class Point {
     private final int z;
     private final int w;
 
-    public Point(final int x, final int y, final int z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.w = 0;
-    }
-
     public Point(final int x, final int y, final int z, final int w) {
         this.x = x;
         this.y = y;
@@ -191,18 +188,6 @@ class Point {
 
     public int getX() {
         return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public int getZ() {
-        return z;
-    }
-
-    public int getW() {
-        return w;
     }
 
     @Override

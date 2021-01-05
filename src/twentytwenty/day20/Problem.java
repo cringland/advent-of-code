@@ -12,6 +12,7 @@ import java.util.stream.Stream;
 
 import common.Matrix;
 import common.StringUtil;
+import common.Util;
 import common.model.Point;
 
 import static common.StringUtil.firstNum;
@@ -55,21 +56,15 @@ public class Problem {
         var pic = Problem.buildImage(tiles);
 
         System.out.println("Problem 1 Answer is: " + pic.productOfCorners());
+        Util.assertEquals(140656720229539L, pic.productOfCorners());
 
-//        printImage(pic.croppedImage());
-//        Trial and error finding orientation of image
         var cropped = pic.croppedImage().flippedHorizontal();
         var seaMonsters = seaMonsters(cropped);
         System.out.println("Found sea monsters: " + seaMonsters);
         var hashCount = cropped.copy().stream().map(l -> l.stream().filter(c -> c.equals('#')).count()).reduce(Math::addExact).get();
-        System.out.println("Problem 2 Answer is: " + (hashCount - (seaMonsters * 15)));
-    }
-
-    private static void printImage(Matrix<Character> image) {
-        image.copy().stream()
-                .map(StringUtil::toString)
-                .map(s -> s.replaceAll("\\.", " "))
-                .forEach(System.out::println);
+        final long problem2Ans = hashCount - (seaMonsters * 15);
+        System.out.println("Problem 2 Answer is: " + problem2Ans);
+        Util.assertEquals(1885L, problem2Ans);
     }
 
     private static Image buildImage(List<Tile> tiles) {

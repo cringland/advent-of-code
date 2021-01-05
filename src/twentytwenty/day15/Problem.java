@@ -5,6 +5,8 @@ import static java.lang.String.format;
 import java.util.HashMap;
 import java.util.List;
 
+import common.Util;
+
 public class Problem {
 
     //https://adventofcode.com/2020/day/15
@@ -32,8 +34,12 @@ public class Problem {
             }
 
             prevNum = currentNum;
-            if (i == 2019 || i == 30000000 - 1) {
+            if (i == 2019) {
                 System.out.println(format("Turn %s: %s", i + 1, currentNum));
+                Util.assertEquals(1325, currentNum);
+            } else if (i == 30000000 - 1) {
+                System.out.println(format("Turn %s: %s", i + 1, currentNum));
+                Util.assertEquals(59006, currentNum);
             }
         }
     }

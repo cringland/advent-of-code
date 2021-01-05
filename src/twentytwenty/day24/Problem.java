@@ -13,6 +13,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import common.Util;
 import common.model.Point;
 
 public class Problem {
@@ -38,15 +39,15 @@ public class Problem {
 
         var count1 = blackTileCount(tiles);
         System.out.println("Problem 1 Answer is: " + count1);
+        Util.assertEquals(360L, count1);
 
         for (int i = 0; i < 100; i++) {
             tiles = mutate(tiles);
-            var count = blackTileCount(tiles);
-            System.out.println("Day " + (i + 1) + ":" + count);
         }
 
         var count2 = blackTileCount(tiles);
         System.out.println("Problem 2 Answer is: " + count2);
+        Util.assertEquals(3924L, count2);
     }
 
     private static long blackTileCount(final Map<Point, Boolean> tiles) {

@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import common.StringUtil;
 import common.Util;
 
 public class Problem {
@@ -25,11 +25,9 @@ public class Problem {
                     var mask = list.get(0);
                     var acts = new ArrayList<Action>();
                     for (var s : list.subList(1, list.size())) {
-                        var matcher = Pattern.compile("\\d+").matcher(s);
-                        matcher.find();
-                        var address = Integer.valueOf(matcher.group());
-                        matcher.find();
-                        var val = Long.valueOf(matcher.group());
+                        var nums = StringUtil.allNums(s);
+                        var address = nums.get(0).intValue();
+                        var val = nums.get(1);
                         acts.add(new Action(mask, address, val));
                     }
                     return acts.stream();
@@ -37,11 +35,7 @@ public class Problem {
                 .collect(Collectors.toList());
 
         var problem1 = actions.stream()
-                .map(action -> {
-                    var maskedVal = maskP1(action.getMask(), action.getVal());
-                    return new AbstractMap.SimpleEntry<>(action.getAddress(), maskedVal);
-                })
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (v1, v2) -> v2))
+                .collect(Collectors.toMap(Action::getAddress, action -> maskP1(action.getMask(), action.getVal()), (v1, v2) -> v2))
                 .values().stream().mapToLong(Long::longValue).sum();
 
         System.out.println("Problem 1 Answer is: " + problem1);
@@ -49,14 +43,14 @@ public class Problem {
 
         var problem2 = actions.stream()
                 .flatMap(action ->
-                        maskP2(action.getMask(), action.getAddress().longValue())
-                                .stream()
-                                .map(addr -> new AbstractMap.SimpleEntry<>(addr, action.getVal())))
+                        maskP2(action.getMask(), action.getAddress().longValue()).stream()
+                                .map(addr -> new AbstractMap.SimpleEntry<>(addr, action.getVal()))
+                )
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (v1, v2) -> v2))
                 .values().stream().mapToLong(Long::longValue).sum();
 
         System.out.println("Problem 2 Answer is: " + problem2);
-        Util.assertEquals(4288986482164L, problem1);
+        Util.assertEquals(4288986482164L, problem2);
     }
 
     private static Long maskP1(final String mask, final Long val) {
@@ -107,7 +101,6 @@ public class Problem {
             getMutations(current, s1, index);
             return current;
         } else if (index >= s.length() - 1) {
-            System.out.println("Adding " + s.toString());
             current.add(fromBinary(s));
             return current;
         }

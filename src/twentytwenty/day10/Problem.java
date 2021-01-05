@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import common.Util;
 import common.model.Range;
 
 import static common.Util.range;
@@ -33,7 +34,7 @@ public class Problem {
         var problem1Answer = diffs.get(0) * diffs.get(2);
 
         System.out.println("Problem 1 Answer is: " + problem1Answer);
-//        Util.assertEquals(2272, problem1Answer);
+        Util.assertEquals(2272, problem1Answer);
 
         Graph graph = new Graph();
         input.forEach(graph::addVertex);
@@ -49,17 +50,15 @@ public class Problem {
                 }
             }
         }
-
-        System.out.println("Problem 1 Answer is: " + graph.countPaths(range.lowest().intValue(), range.highest().intValue()));
+        var problem2Answer = graph.countPaths(range.lowest(), range.highest());
+        System.out.println("Problem 1 Answer is: " + problem2Answer);
+        Util.assertEquals(84627647627264L, problem2Answer);
     }
-
-
 }
 
 class Graph {
 
     private Map<Integer, List<Integer>> adjVertices = new HashMap<>();
-    private long startTime;
     private Map<Integer, Long> cache = new HashMap<>();
 
     public void addVertex(Integer num) {
@@ -68,11 +67,9 @@ class Graph {
 
     public void addEdge(Integer num1, Integer num2) {
         adjVertices.get(num1).add(num2);
-//        adjVertices.get(v2).add(v1);
     }
 
     public long countPaths(long start, long fin) {
-        startTime = System.currentTimeMillis();
         long pathCount = 0;
         pathCount += countPathsRec(start, fin);
         return pathCount;

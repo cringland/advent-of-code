@@ -4,12 +4,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.AbstractMap;
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import common.Util;
 
 import static common.StringUtil.allNums;
 
@@ -29,20 +28,18 @@ public class Problem {
         String pattern1 = getPattern(rules);
         var p1Ans = input[1].lines().filter(s -> s.matches(pattern1)).count();
         System.out.println("Problem 1 Answer is: " + p1Ans);
+        Util.assertEquals(239L, p1Ans);
 
         String pattern2 = getPatternP2(rules);
         var p2Ans = input[1].lines().filter(s -> s.matches(pattern2)).count();
         System.out.println("Problem 2 Answer is: " + p2Ans);
+        Util.assertEquals(405L, p2Ans);
     }
 
     private static String getPatternP2(final Map<Integer, String> rules) {
         String r42 = getPattern(42, rules);
         String r31 = getPattern(31, rules);
 
-        // originally created this using a loop, but this is more readable... i think
-        for (int i = 0; i < 10; i++) {
-            
-        }
         //Should really revisit this as I stole it
         String masterRegex = "^((42+) ((42 31) | (42{2} 31{2}) | (42{3} 31{3}) | (42{4} 31{4}) | (42{5} 31{5}) | (42{6} 31{6}) | (42{7} 31{7}) | (42{8} 31{8}) | (42{9} 31{9}) | (42{10} 31{10})))$";
         return masterRegex.replace("42", r42).replace("31", r31).replace(" ", "");

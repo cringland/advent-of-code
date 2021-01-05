@@ -21,7 +21,7 @@ public class Problem {
                 .collect(Collectors.toList());
 
         var preamble = 25;
-        long problem1Answer = 0L;
+        var problem1Answer = 0L;
         for (int i = preamble; i < input.size(); i++) {
             var current = input.get(i);
             var valid = false;

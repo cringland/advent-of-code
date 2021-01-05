@@ -2,6 +2,8 @@ package twentytwenty.day25;
 
 import java.util.HashMap;
 
+import common.Util;
+
 public class Problem {
 
     //https://adventofcode.com/2020/day/25
@@ -29,10 +31,10 @@ public class Problem {
         for (int i = 0; i < loopSizePk1; i++) {
             encKey = encKey * pk2;
             encKey = encKey % 20201227;
-//            System.out.println("enc key = " + encKey);
         }
         
-        System.out.println("enc key = " + encKey);
+        System.out.println("Problem 1 answer: " + encKey);
+        Util.assertEquals(18329280L, encKey);
     }
 }
 

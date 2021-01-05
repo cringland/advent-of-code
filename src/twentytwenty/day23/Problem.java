@@ -26,6 +26,7 @@ public class Problem {
         var p2cup1 = play2(input2, 1000000, 10000000);
         var p2Ans = p2cup1.getNext().getValue().longValue() * p2cup1.getNext().getNext().getValue().longValue();
         System.out.println("Problem 2 Answer is: " + p2Ans);
+        Util.assertEquals(96604396189L, p2Ans);
     }
 
     private static Cup play2(final List<Integer> input, final int max, final int iters) {

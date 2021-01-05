@@ -10,6 +10,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import common.Util;
+
 public class Problem {
 
     //https://adventofcode.com/2020/day/22
@@ -20,18 +22,18 @@ public class Problem {
 
         var result = playCombat(p1Hand, p2Hand);
         System.out.println("Problem 1 Answer is: " + result.getScore());
+        Util.assertEquals(31308L, result.getScore());
 
         var rResult = playRCombat(new HashSet<>(), p1Hand, p2Hand);
         System.out.println("Problem 2 Answer is: " + rResult.getScore());
+        Util.assertEquals(33647L, rResult.getScore());
     }
 
     private static GameResult playCombat(final List<Integer> p1HandOrg, final List<Integer> p2HandOrg) {
         var p1Hand = new ArrayList<>(p1HandOrg);
         var p2Hand = new ArrayList<>(p2HandOrg);
 
-        int moveCount = 0;
         while (!p1Hand.isEmpty() && !p2Hand.isEmpty()) {
-            moveCount++;
             int p1 = p1Hand.get(0);
             int p2 = p2Hand.get(0);
             p1Hand.remove(0);
@@ -45,7 +47,6 @@ public class Problem {
                 p2Hand.add(p1);
             }
         }
-        System.out.println("Combat Game took " + moveCount + " moves");
         return new GameResult(p1Hand, p2Hand);
     }
 
@@ -84,7 +85,6 @@ public class Problem {
                 }
             }
         }
-
         return new GameResult(p1Hand, p2Hand);
     }
 
