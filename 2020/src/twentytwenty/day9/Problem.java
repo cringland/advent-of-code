@@ -36,7 +36,7 @@ public class Problem {
             if (!valid) {
                 problem1Answer = current;
                 System.out.println("Problem 1 Answer is: " + problem1Answer);
-                Util.assertEquals(133015568L, problem1Answer);
+                Util.assertEquals(10884537L, problem1Answer);
                 break;
             }
         }
@@ -54,6 +54,6 @@ public class Problem {
         long problem2Answer = range(contiguousNums).sum();
 
         System.out.println("Problem 2 Answer is: " + problem2Answer);
-        Util.assertEquals(16107959L, problem1Answer);
+        Util.assertEquals(1261309L, problem2Answer);
     }
 }

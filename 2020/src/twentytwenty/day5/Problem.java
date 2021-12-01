@@ -30,10 +30,10 @@ public class Problem {
         }
 
         System.out.println("Problem 1: Highest ID = " + highestId);
-        Util.assertEquals(878, highestId);
+        Util.assertEquals(987, highestId);
 
         System.out.println("Problem 2: Missing ID = " + missingId);
-        Util.assertEquals(504, missingId);
+        Util.assertEquals(603, missingId);
     }
 
     private static int binarySpacePartition(String s, char high) {

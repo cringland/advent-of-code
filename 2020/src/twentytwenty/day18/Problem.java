@@ -22,13 +22,12 @@ public class Problem {
                 .collect(Collectors.toList());
 
         var sumP1 = solveAll(input, Problem::solveSimple);
-
         System.out.println("Problem 1 Answer is: " + sumP1);
-        Util.assertEquals(4297397455886L, sumP1);
-        
+        Util.assertEquals(24650385570008L, sumP1);
+
         var sumP2 = solveAll(input, Problem::solveAdvanced);
         System.out.println("Problem 2 Answer is: " + sumP2);
-        Util.assertEquals(93000656194428L, sumP2);
+        Util.assertEquals(158183007916215L, sumP2);
     }
 
     private static long solveAll(final List<String> input, final Function<String, Long> solver) {
@@ -37,14 +36,23 @@ public class Problem {
                 .sum();
     }
 
+    //solver.apply("8*9*4*60+4+6")
+    private static Long solve(String s, final Function<String, Long> solver) {
+        var copy = s;
+        while (copy.contains("(")) {
+            copy = removeABracket(copy, solver);
+        }
+        return solver.apply(copy);
+    }
+
     private static Long solveAdvanced(final String org) {
         String input = org;
         while (input.contains("+")) {
-            var matcher = Pattern.compile("(\\d+)(?:\\++)(?!.*\\+)(\\d+)").matcher(input);
+            var matcher = Pattern.compile("(\\d*)(?:\\++)(?!.*\\+)(\\d*)").matcher(input);
             matcher.find();
             var sum = matcher.group();
             var nums = allNums(sum);
-            input = input.replace(sum, sum(nums).toString());
+            input = input.replaceFirst("(\\d*)(?:\\++)(?!.*\\+)(\\d*)", sum(nums).toString());
         }
         var matcher = Pattern.compile("[+*](?!.*[+*])").matcher(input);
         var num = getLastInt(input);
@@ -57,15 +65,6 @@ public class Problem {
             return num;
         }
     }
-
-    private static Long solve(String s, final Function<String, Long> solver) {
-        var copy = s;
-        while (copy.contains("(")) {
-            copy = removeABracket(copy, solver);
-        }
-        return solver.apply(copy);
-    }
-
 
     private static Long solveSimple(final String input) {
         var matcher = Pattern.compile("[+*](?!.*[+*])").matcher(input);
@@ -90,6 +89,7 @@ public class Problem {
                     startIndex = i;
                     continue;
                 case ')':
+                    //solver.apply("8*9*4+60+4+6")
                     String bracketContents = s.substring(startIndex + 1, i);
                     Long solved = solver.apply(bracketContents);
                     return sb.replace(startIndex, i + 1, solved.toString()).toString();
@@ -105,4 +105,6 @@ public class Problem {
         throw new IllegalStateException("Something went wrong for input: " + input);
     }
 }
+
+
 

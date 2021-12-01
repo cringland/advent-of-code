@@ -17,7 +17,7 @@ public class Problem {
 
         long problem1Answer = getProblem1Answer(input);
         System.out.println("Problem 1 Answer is: " + problem1Answer);
-        Util.assertEquals(415L, problem1Answer);
+        Util.assertEquals(1294L, problem1Answer);
         var ship = Point.of(0, 0);
         var waypoint = Point.of(10, 1);
         for (var str : input) {
@@ -39,7 +39,7 @@ public class Problem {
         }
         var problem2Answer = Math.abs(ship.x()) + Math.abs(ship.y());
         System.out.println("Problem 2 Answer is: " + problem2Answer);
-        Util.assertEquals(29401L, problem1Answer);
+        Util.assertEquals(20592L, problem1Answer);
     }
 
     private static long getProblem1Answer(final List<String> input) {

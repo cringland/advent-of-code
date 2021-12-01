@@ -11,7 +11,7 @@ public class Problem {
 
     //https://adventofcode.com/2020/day/15
     public static void main(String[] args) {
-        var input = List.of(19, 20, 14, 0, 9, 1);
+        var input = List.of(20, 9, 11, 0, 1, 2);
 
         var map = new HashMap<Integer, T>();
         for (int i = 0; i < input.size(); i++)
@@ -36,10 +36,10 @@ public class Problem {
             prevNum = currentNum;
             if (i == 2019) {
                 System.out.println(format("Turn %s: %s", i + 1, currentNum));
-                Util.assertEquals(1325, currentNum);
+                Util.assertEquals(1111, currentNum);
             } else if (i == 30000000 - 1) {
                 System.out.println(format("Turn %s: %s", i + 1, currentNum));
-                Util.assertEquals(59006, currentNum);
+                Util.assertEquals(48568, currentNum);
             }
         }
     }

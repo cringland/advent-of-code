@@ -41,10 +41,10 @@ public class Problem {
         int goldInnerBags = countBags(head);
 
         System.out.println("Problem 1: Number of bags that can hold a gold bag = " + (lastCount - 1));
-        Util.assertEquals(161, (lastCount - 1)); // -1 as it contains "shiny gold"
+        Util.assertEquals(257, (lastCount - 1)); // -1 as it contains "shiny gold"
 
         System.out.println("Problem 2: Total bags in a gold bag = " + (goldInnerBags - 1));
-        Util.assertEquals(30899, goldInnerBags - 1); // -1 as it contains the "shiny gold" bag
+        Util.assertEquals(1038, goldInnerBags - 1); // -1 as it contains the "shiny gold" bag
     }
 
 

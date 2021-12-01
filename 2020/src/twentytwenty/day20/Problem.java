@@ -20,7 +20,7 @@ import static common.StringUtil.firstNum;
 public class Problem {
 
     private static final String SEA_MONSTER =
-            "                  # \n"
+                      "                  # \n"
                     + "#    ##    ##    ###\n"
                     + " #  #  #  #  #  #   ";
 
@@ -56,15 +56,16 @@ public class Problem {
         var pic = Problem.buildImage(tiles);
 
         System.out.println("Problem 1 Answer is: " + pic.productOfCorners());
-        Util.assertEquals(140656720229539L, pic.productOfCorners());
+        Util.assertEquals(18262194216271L, pic.productOfCorners());
 
-        var cropped = pic.croppedImage().flippedHorizontal();
+        //This has to be manually done at the moment
+        var cropped = pic.croppedImage().flippedHorizontal().rotated90().rotated90().rotated90();
         var seaMonsters = seaMonsters(cropped);
         System.out.println("Found sea monsters: " + seaMonsters);
         var hashCount = cropped.copy().stream().map(l -> l.stream().filter(c -> c.equals('#')).count()).reduce(Math::addExact).get();
         final long problem2Ans = hashCount - (seaMonsters * 15);
         System.out.println("Problem 2 Answer is: " + problem2Ans);
-        Util.assertEquals(1885L, problem2Ans);
+        Util.assertEquals(2023L, problem2Ans);
     }
 
     private static Image buildImage(List<Tile> tiles) {

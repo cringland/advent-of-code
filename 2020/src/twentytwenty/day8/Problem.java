@@ -41,7 +41,7 @@ public class Problem {
         var problemOneAcc = getAcc(ops).acc;
 
         System.out.println("Problem 1: Accumulator before it loops = " + problemOneAcc);
-        Util.assertEquals(1217, problemOneAcc);
+        Util.assertEquals(1317, problemOneAcc);
 
         var problemTwoAcc = -1;
         for (var perm : permutations) {
@@ -55,7 +55,7 @@ public class Problem {
 
 
         System.out.println("Problem 2: Accumulator of correct permutation = " + problemTwoAcc);
-        Util.assertEquals(501, problemTwoAcc);
+        Util.assertEquals(1033, problemTwoAcc);
     }
 
     private static Result getAcc(final List<Op> ops) {

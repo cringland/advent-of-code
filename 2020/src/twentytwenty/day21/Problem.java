@@ -49,7 +49,7 @@ public class Problem {
                 .reduce(0L, Math::addExact);
 
         System.out.println("Problem 1 Answer is: " + nopeCount);
-        Util.assertEquals(2078L, nopeCount);
+        Util.assertEquals(2262L, nopeCount);
         var maybesMap = maybesL.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, entry -> new HashSet<>(entry.getValue())));
 
         while (maybesMap.values().stream().anyMatch(set -> set.size() > 1)) {
@@ -73,7 +73,7 @@ public class Problem {
                 .reduce((s1,s2) -> s1 + "," + s2).get();
 
         System.out.println("Problem 2 Answer is: " + p2Ans);
-        Util.assertEquals("lmcqt,kcddk,npxrdnd,cfb,ldkt,fqpt,jtfmtpd,tsch", p2Ans);
+        Util.assertEquals("cxsvdm,glf,rsbxb,xbnmzr,txdmlzd,vlblq,mtnh,mptbpz", p2Ans);
     }
 
     private static Set<String> getAll(final List<Food> foods, final Function<Food, Set<String>> getter) {

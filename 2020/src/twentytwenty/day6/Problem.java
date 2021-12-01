@@ -35,9 +35,9 @@ public class Problem {
                 .reduce(0, Math::addExact);
 
         System.out.println("Problem 1: Union size = " + unionSum);
-        Util.assertEquals(6504, unionSum);
+        Util.assertEquals(6551, unionSum);
 
         System.out.println("Problem 2: Interesect sum = " + intersectSum);
-        Util.assertEquals(3351, intersectSum);
+        Util.assertEquals(3358, intersectSum);
     }
 }

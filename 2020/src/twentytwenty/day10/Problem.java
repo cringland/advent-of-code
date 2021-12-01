@@ -34,7 +34,7 @@ public class Problem {
         var problem1Answer = diffs.get(0) * diffs.get(2);
 
         System.out.println("Problem 1 Answer is: " + problem1Answer);
-        Util.assertEquals(2272, problem1Answer);
+        Util.assertEquals(2080, problem1Answer);
 
         Graph graph = new Graph();
         input.forEach(graph::addVertex);
@@ -52,7 +52,7 @@ public class Problem {
         }
         var problem2Answer = graph.countPaths(range.lowest(), range.highest());
         System.out.println("Problem 1 Answer is: " + problem2Answer);
-        Util.assertEquals(84627647627264L, problem2Answer);
+        Util.assertEquals(6908379398144L, problem2Answer);
     }
 }
 

@@ -22,11 +22,11 @@ public class Problem {
 
         var result = playCombat(p1Hand, p2Hand);
         System.out.println("Problem 1 Answer is: " + result.getScore());
-        Util.assertEquals(31308L, result.getScore());
+        Util.assertEquals(32472L, result.getScore());
 
         var rResult = playRCombat(new HashSet<>(), p1Hand, p2Hand);
         System.out.println("Problem 2 Answer is: " + rResult.getScore());
-        Util.assertEquals(33647L, rResult.getScore());
+        Util.assertEquals(36463L, rResult.getScore());
     }
 
     private static GameResult playCombat(final List<Integer> p1HandOrg, final List<Integer> p2HandOrg) {

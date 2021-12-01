@@ -22,11 +22,11 @@ public class Problem {
 
         var p1 = solve(input, Problem::getNewCharP1);
         System.out.println("Problem 1 Answer is: " + p1);
-        Util.assertEquals(2270L, p1);
+        Util.assertEquals(2334L, p1);
 
         var p2 = solve(input, Problem::getNewCharP2);
         System.out.println("Problem 2 Answer is: " + p2);
-        Util.assertEquals(2042L, p2);
+        Util.assertEquals(2100L, p2);
     }
 
     private static Long solve(final List<List<Character>> input, final BiFunction<List<List<Character>>, Point, Character> mapper) {

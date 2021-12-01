@@ -26,9 +26,9 @@ public class Problem {
                 .count();
 
         System.out.println("Problem 1: Number of valid Passwords: " + problem1);
-        Util.assertEquals(456L, problem1);
+        Util.assertEquals(560L, problem1);
         System.out.println("Problem 2: Number of valid Passwords: " + problem2);
-        Util.assertEquals(308L, problem2);
+        Util.assertEquals(303L, problem2);
     }
 }
 

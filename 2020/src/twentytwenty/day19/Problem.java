@@ -28,12 +28,12 @@ public class Problem {
         String pattern1 = getPattern(rules);
         var p1Ans = input[1].lines().filter(s -> s.matches(pattern1)).count();
         System.out.println("Problem 1 Answer is: " + p1Ans);
-        Util.assertEquals(239L, p1Ans);
+        Util.assertEquals(241L, p1Ans);
 
         String pattern2 = getPatternP2(rules);
         var p2Ans = input[1].lines().filter(s -> s.matches(pattern2)).count();
         System.out.println("Problem 2 Answer is: " + p2Ans);
-        Util.assertEquals(405L, p2Ans);
+        Util.assertEquals(424L, p2Ans);
     }
 
     private static String getPatternP2(final Map<Integer, String> rules) {

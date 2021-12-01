@@ -12,7 +12,8 @@ public class Problem {
     //https://adventofcode.com/2020/day/23
     public static void main(String[] args) {
 //        var input1 = List.of(3, 8, 9, 1, 2, 5, 4, 6, 7);
-        var input1 = List.of(1, 5, 8, 9, 3, 7, 4, 6, 2);
+//        var input1 = List.of(1, 5, 8, 9, 3, 7, 4, 6, 2);
+        var input1 = List.of(8, 7, 1, 3, 6, 9, 4, 5, 2);
 
         var p1cup1 = play2(input1, 9, 100);
         final String p1Ans = p1String(p1cup1);

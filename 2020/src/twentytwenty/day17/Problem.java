@@ -35,9 +35,9 @@ public class Problem {
         }
 
         System.out.println("Problem 1 Answer is: " + grid3.activeCount());
-        Util.assertEquals(263L, grid3.activeCount());
+        Util.assertEquals(267L, grid3.activeCount());
         System.out.println("Problem 2 Answer is: " + grid4.activeCount());
-        Util.assertEquals(1680L, grid4.activeCount());
+        Util.assertEquals(1812L, grid4.activeCount());
     }
 }
 

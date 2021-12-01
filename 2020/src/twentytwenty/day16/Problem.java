@@ -90,9 +90,9 @@ public class Problem {
         }
 
         System.out.println("Problem 1 Answer is: " + p1ErrRate);
-        Util.assertEquals(21081L, p1ErrRate);
+        Util.assertEquals(20058L, p1ErrRate);
         System.out.println("Problem 2 Answer is: " + problem2Product);
-        Util.assertEquals(314360510573L, problem2Product);
+        Util.assertEquals(366871907221L, problem2Product);
     }
 
     private static List<Long> ticket(String ticket) {

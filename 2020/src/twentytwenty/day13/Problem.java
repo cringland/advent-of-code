@@ -34,9 +34,9 @@ public class Problem {
             }
         }
         System.out.println("Problem 1 Answer is: " + problem1Answer);
-        Util.assertEquals(136.0, problem1Answer);
+        Util.assertEquals(205.0, problem1Answer);
 
-
+//      TODO: Fix this lol
         var vals = new ArrayList<Entry<Long, Long>>();
         for (Long i = 0L; i < busIds.size(); i++) {
             long mod = busIds.get(i.intValue());
@@ -62,7 +62,7 @@ public class Problem {
 
         var problem2Answer = result % M;
         System.out.println("Problem 2 Answer is: " + problem2Answer);
-        Util.assertEquals(305068317272992L, problem2Answer);
+        Util.assertEquals(803025030761664L, problem2Answer);
     }
 
     static long inv(long a, long m) {

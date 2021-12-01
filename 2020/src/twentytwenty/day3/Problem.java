@@ -22,9 +22,9 @@ public class Problem {
         }).stream().map(r -> treesHit(patterns, r)).reduce(1L, Math::multiplyExact);
         productTreesHit *= problem1;
         System.out.println("Problem 1: Trees hit for right 3 down 1: " + problem1);
-        Util.assertEquals(252L, problem1);
+        Util.assertEquals(162L, problem1);
         System.out.println("Problem 2: Product of all trees hit: " + productTreesHit);
-        Util.assertEquals(2608962048L, productTreesHit);
+        Util.assertEquals(3064612320L, productTreesHit);
     }
 
     private static long treesHit(List<String> patterns, Range range) {

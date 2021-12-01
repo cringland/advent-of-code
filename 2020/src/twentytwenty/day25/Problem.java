@@ -8,8 +8,8 @@ public class Problem {
 
     //https://adventofcode.com/2020/day/25
     public static void main(String[] args) {
-        var pk1 = 12092626L;
-        var pk2 = 4707356L;
+        var pk1 = 14788856L;
+        var pk2 = 19316454L;
 //        var pk1 = 5764801L;
 //        var pk2 = 17807724L;
 
@@ -34,7 +34,7 @@ public class Problem {
         }
         
         System.out.println("Problem 1 answer: " + encKey);
-        Util.assertEquals(18329280L, encKey);
+        Util.assertEquals(545789L, encKey);
     }
 }
 

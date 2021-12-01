@@ -26,7 +26,7 @@ public class Problem {
             } else {
                 int answer = in1 * in2;
                 System.out.println("Problem 1: Answer is: " + (in1 * in2));
-                Util.assertEquals(1016131, answer);
+                Util.assertEquals(996075, answer);
                 break;
             }
         }
@@ -36,7 +36,7 @@ public class Problem {
                 for (var k = j + 1; k < input.size(); k++)
                     if (input.get(i) + input.get(j) + input.get(k) == 2020) {
                         var answer = input.get(i) * input.get(j) * input.get(k);
-                        Util.assertEquals(276432018, answer);
+                        Util.assertEquals(51810360, answer);
                         System.out.println("Problem 2 Answer is: " + answer);
                         break;
                     }

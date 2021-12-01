@@ -35,11 +35,11 @@ public class Problem {
 
         var reqFieldCount = withRequiredFields.size();
         System.out.println("Problem 1: Valid passports = " + reqFieldCount);
-        Util.assertEquals(190, reqFieldCount);
+        Util.assertEquals(233, reqFieldCount);
 
         var validPassportCount = withRequiredFields.stream().filter(Problem::isValid).count();
         System.out.println("Problem 2: Valid passports = " + validPassportCount);
-        Util.assertEquals(121L, validPassportCount);
+        Util.assertEquals(111L, validPassportCount);
     }
 
     private static boolean hasRequiredFields(Map<String, String> passport) {
