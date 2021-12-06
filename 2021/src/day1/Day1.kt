@@ -6,16 +6,16 @@ import Day
 class Day1 : Day {
     private val input = File("src/day1/input").readLines().map(String::toLong)
 
-    override fun problemOne(): String {
-        return countIncrements(input).toString()
+    override fun problemOne(): Int {
+        return countIncrements(input)
     }
 
-    override fun problemTwo(): String {
+    override fun problemTwo(): Int {
         val slidingWindowSums = input.dropLast(2).mapIndexed { i, value -> value + input[i + 1] + input[i + 2] }
-        return countIncrements(slidingWindowSums).toString()
+        return countIncrements(slidingWindowSums)
     }
 
-    fun countIncrements(array: List<Long>): Int {
+    private fun countIncrements(array: List<Long>): Int {
         var count = 0;
         for (i in 0 until array.size - 1) {
             if (array[i] < array[i + 1]) {

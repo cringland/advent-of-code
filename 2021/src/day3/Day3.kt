@@ -7,16 +7,16 @@ class Day3 : Day {
     private val input = File("src/day3/input").readLines().filter { it.isNotEmpty() }
             .map { it.toList().map(Character::getNumericValue) }
 
-    override fun problemOne(): String {
+    override fun problemOne(): Int {
         val maxBinary = input.columnCounts()
                 .map { map -> if (map[0].orEmpty().size > map[1].orEmpty().size) 0 else 1 }
-        return (maxBinary.binaryToDecimal() * maxBinary.invertBinary().binaryToDecimal()).toString()
+        return maxBinary.binaryToDecimal() * maxBinary.invertBinary().binaryToDecimal()
     }
 
-    override fun problemTwo(): String {
+    override fun problemTwo(): Int {
         val oxygen = getMostLike { ones, zeros -> ones >= zeros}
         val co2 = getMostLike { ones, zeros -> ones < zeros}
-        return (oxygen.binaryToDecimal() * co2.binaryToDecimal()).toString()
+        return oxygen.binaryToDecimal() * co2.binaryToDecimal()
     }
     
     fun getMostLike(onesToZerosCompare: (Int, Int) -> Boolean): List<Int> {

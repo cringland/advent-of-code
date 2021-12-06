@@ -1,4 +1,4 @@
 interface Day {
-    fun problemOne(): String
-    fun problemTwo(): String
+    fun problemOne(): Any
+    fun problemTwo(): Any
 }

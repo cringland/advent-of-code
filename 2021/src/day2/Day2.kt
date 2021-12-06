@@ -13,22 +13,22 @@ class Day2 : Day {
         }
     }
 
-    fun getNum(value: String): Int {
-        return "(\\d*)$".toRegex().find(value)!!.value.toInt()
-    }
-
-    override fun problemOne(): String {
+    override fun problemOne(): Int {
         val pair = inputAsPairs.reduce { acc, pair -> Pair(acc.first + pair.first, acc.second + pair.second) }
-        return (pair.first * pair.second).toString()
+        return pair.first * pair.second
     }
 
-    override fun problemTwo(): String {
+    override fun problemTwo(): Int {
         val triple = inputAsPairs.map { Triple(it.first, it.second, 0) }
                 .reduce { acc, triple ->
                     val currentAim = acc.second + triple.second
                     val depth = acc.third + (currentAim * triple.first)
                     Triple(acc.first + triple.first, currentAim, depth)
                 }
-        return (triple.first * triple.third).toString()
+        return triple.first * triple.third
+    }
+
+    private fun getNum(value: String): Int {
+        return "(\\d*)$".toRegex().find(value)!!.value.toInt()
     }
 }
