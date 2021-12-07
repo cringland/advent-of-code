@@ -4,6 +4,7 @@ import day3.Day3
 import day4.Day4
 import day5.Day5
 import day6.Day6
+import day7.Day7
 
 fun main(args: Array<String>) {
     logDay(Day1(), 1)
@@ -11,7 +12,8 @@ fun main(args: Array<String>) {
     logDay(Day3(), 3)
     logDay(Day4(), 4)
     logDay(Day5(), 5)
-    logDay(Day6(), 5)
+    logDay(Day6(), 6)
+    logDay(Day7(), 7)
 }
 
 fun logDay(day: Day, i: Int) {
