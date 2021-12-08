@@ -20,7 +20,7 @@ class Day7 : Day {
         }
     }
 
-    fun findCheapestFuel(fuelCalculator: (Int, Int) -> Int): Int {
+    private fun findCheapestFuel(fuelCalculator: (Int, Int) -> Int): Int {
         return (min..max).map { i -> input.map { fuelCalculator.invoke(it, i) }.sum() }.min()!!
     }
 }
