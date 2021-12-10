@@ -5,18 +5,12 @@ import java.io.File
 import java.util.*
 
 class Day10 : Day {
-    private val closeMap = mapOf(
-            '(' to ')',
-            '[' to ']',
-            '{' to '}',
-            '<' to '>')
-
-    private val input = File("src/day10/input").readLines().map(String::toCharArray)
+    private val lines = File("src/day10/input").readLines().map { Line(it) }
 
 
     override fun problemOne(): Int {
-        return input.mapNotNull { line -> corruptedCheck(line) }.map {
-            when (it.second) {
+        return lines.mapNotNull { it.corruptLetter }.map {
+            when (it) {
                 ')' -> 3
                 ']' -> 57
                 '}' -> 1197
@@ -26,7 +20,7 @@ class Day10 : Day {
     }
 
     override fun problemTwo(): Long {
-        val scores = input.mapNotNull { line -> autocomplete(line) }
+        val scores = lines.mapNotNull { it.autocomplete }
                 .map {
                     it.fold(0L) { acc, c ->
                         val i = when (c) {
@@ -38,31 +32,34 @@ class Day10 : Day {
                         (acc * 5) + i
                     }
                 }.sorted()
-        val mid = (scores.size - 1) / 2
-        return scores[mid]
+        return scores[(scores.size - 1) / 2]
     }
+}
 
-    private fun corruptedCheck(line: CharArray): Pair<CharArray, Char>? {
+class Line(str: String) {
+
+    private val closeMap = mapOf(
+            '(' to ')',
+            '[' to ']',
+            '{' to '}',
+            '<' to '>')
+
+    var corruptLetter: Char? = null
+    var autocomplete: CharArray? = null
+
+    init {
         val expectedClosingStack = Stack<Char>()
-        for (c in line) {
-            when {
-                closeMap.keys.contains(c) -> expectedClosingStack.push(closeMap[c])
-                expectedClosingStack.peek() == c -> expectedClosingStack.pop()
-                else -> return line to c
+        loop@ for (c in str) {
+            when (c) {
+                in closeMap -> expectedClosingStack.push(closeMap[c])
+                expectedClosingStack.peek() -> expectedClosingStack.pop()
+                else -> {
+                    corruptLetter = c
+                    break@loop
+                }
             }
         }
-        return null
-    }
-
-    private fun autocomplete(line: CharArray): CharArray? {
-        val expectedClosingStack = Stack<Char>()
-        for (c in line) {
-            when {
-                closeMap.keys.contains(c) -> expectedClosingStack.push(closeMap[c])
-                expectedClosingStack.peek() == c -> expectedClosingStack.pop()
-                else -> return null
-            }
-        }
-        return expectedClosingStack.toCharArray().reversedArray()
+        if (corruptLetter == null)
+            autocomplete = expectedClosingStack.toCharArray().reversedArray()
     }
 }
