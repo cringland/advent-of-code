@@ -7,17 +7,19 @@ import day6.Day6
 import day7.Day7
 import day8.Day8
 import day9.Day9
+import day10.Day10
 
 fun main(args: Array<String>) {
-    logDay(Day1(), 1)
-    logDay(Day2(), 2)
-    logDay(Day3(), 3)
-    logDay(Day4(), 4)
-    logDay(Day5(), 5)
-    logDay(Day6(), 6)
-    logDay(Day7(), 7)
-    logDay(Day8(), 8)
-    logDay(Day9(), 9)
+//    logDay(Day1(), 1)
+//    logDay(Day2(), 2)
+//    logDay(Day3(), 3)
+//    logDay(Day4(), 4)
+//    logDay(Day5(), 5)
+//    logDay(Day6(), 6)
+//    logDay(Day7(), 7)
+//    logDay(Day8(), 8)
+//    logDay(Day9(), 9)
+    logDay(Day10(), 10)
 }
 
 fun logDay(day: Day, i: Int) {
