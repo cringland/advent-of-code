@@ -32,7 +32,7 @@ class Day9 : Day {
         return this.getBasin(x, y, mutableListOf(x to y)).size
     }
 
-    private fun List<List<Int>>.getBasin(x: Int, y: Int, currentBasin: MutableList<Pair<Int, Int>>): MutableList<Pair<Int, Int>> {
+    private fun List<List<Int>>.getBasin(x: Int, y: Int, currentBasin: MutableList<Pair<Int, Int>>): List<Pair<Int, Int>> {
         val currentValue = input[x][y]
         dirs.map { it(x, y) }
                 .filter { this.getOrNull(it.first, it.second) != null }
@@ -42,7 +42,7 @@ class Day9 : Day {
                 .forEach {
                     this.getBasin(it.first, it.second, currentBasin)
                 }
-        return currentBasin
+        return currentBasin.toList()
     }
 
     private fun List<List<Int>>.getAdjacentValues(x: Int, y: Int): List<Triple<Int, Int, Int>> {
