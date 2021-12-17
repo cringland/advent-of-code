@@ -17,6 +17,7 @@ data class Point2(val x: Int, val y: Int) {
 
     fun diagAdjacent(): List<Point2> = diagDirs.map { it(x, y) } + this.adjacent()
 
+    operator fun plus(that: Point2): Point2 = (this.x + that.x) by (this.y + that.y)
 }
 
 infix fun Int.by(that: Int): Point2 = Point2(this, that)
