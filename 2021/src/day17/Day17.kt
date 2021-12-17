@@ -26,15 +26,18 @@ class Day17 : Day {
     private fun Point2.calculatePath(target: Pair<IntProgression, IntProgression>): List<Point2>? {
         var velocity = this
         val points = mutableListOf(0 by 0)
-        while (!points.last().inRange(target)
-                && !(velocity.x == 0 && points.last().x !in target.first)
-                && !(points.last().y <= target.second.last)) {
+        while (true) {
             points.add(points.last() + velocity)
+            if (points.last().inRange(target))
+                return points
+            if ((velocity.x == 0 && points.last().x !in target.first)
+                    || (points.last().y <= target.second.last))
+                return null
+
             val newX = Math.max(velocity.x - 1, 0)
             val newY = velocity.y - 1
             velocity = newX by newY
         }
-        return if (points.last().inRange(target)) points else null
     }
 
     private fun Point2.inRange(target: Pair<IntProgression, IntProgression>): Boolean {
