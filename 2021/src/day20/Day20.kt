@@ -16,6 +16,14 @@ class Day20 : Day {
         return image.mutate().mutate().flatten().count { it }
     }
 
+    override fun problemTwo(): Int {
+        var current = image
+        repeat(50) {
+            current = current.mutate()
+        }
+        return current.flatten().count { it }
+    }
+
     private fun List<List<Boolean>>.mutate(): List<List<Boolean>> {
         return (-3..this.size + 3).map { x ->
             (-3..this.first().size + 3).map { y ->
@@ -25,14 +33,6 @@ class Day20 : Day {
                 algorithm[index]
             }
         }.also { infinite = if (infinite) algorithm.last() else algorithm.first() }
-    }
-
-    override fun problemTwo(): Int {
-        var current = image
-        repeat(50) {
-            current = current.mutate()
-        }
-        return current.flatten().count { it }
     }
 }
 

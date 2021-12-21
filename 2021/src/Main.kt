@@ -11,6 +11,7 @@ import day18.Day18
 import day19.Day19
 import day2.Day2
 import day20.Day20
+import day21.Day21
 import day3.Day3
 import day4.Day4
 import day5.Day5
@@ -40,10 +41,11 @@ fun main(args: Array<String>) {
             { Day17() },
             { Day18() },
             { Day19() },
-            { Day20() }
+            { Day20() },
+            { Day21() }
     )
 //    days.forEachIndexed { i, it -> logDay(i + 1, it) }
-    logDay(20) { Day20() }
+    logDay(21) { Day21() }
 }
 
 fun logDay(i: Int, f: () -> Day) {
