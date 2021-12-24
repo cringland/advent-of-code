@@ -119,8 +119,7 @@ class Day23 : Day {
     private val initialStateP2 = State(listOf('C', 'D', 'D', 'B'), listOf('D', 'C', 'B', 'A'), listOf('D', 'B', 'A', 'B'), listOf('A', 'A', 'C', 'C'), List(11) { '.' })
 
     override fun problemOne(): Long {
-//        return findShortest(initialStateP1)
-        return 1L
+        return findShortest(initialStateP1)
 
     }
 
@@ -128,7 +127,7 @@ class Day23 : Day {
         return findShortest(initialStateP2)
     }
 
-    fun findShortest(start: State): Long {
+    private fun findShortest(start: State): Long {
         val processed = mutableSetOf<State>()
         val totals = mutableSetOf<Total>()
         val toProcess = PriorityQueue<Total>()
@@ -137,7 +136,7 @@ class Day23 : Day {
         while (toProcess.isNotEmpty()) {
             val u = toProcess.poll()
             if (u.state.isComplete()) {
-                totals.add(u)
+                return u.cost
             }
             processed.add(u.state)
             u.state.getMoves().forEach { nextMove ->
@@ -147,7 +146,7 @@ class Day23 : Day {
                 }
             }
         }
-        return totals.minBy { it.cost }!!.cost
+        throw RuntimeException("oops")
     }
 }
 
