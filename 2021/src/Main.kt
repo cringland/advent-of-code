@@ -14,6 +14,7 @@ import day20.Day20
 import day21.Day21
 import day22.Day22
 import day23.Day23
+import day25.Day25
 import day3.Day3
 import day4.Day4
 import day5.Day5
@@ -46,7 +47,9 @@ fun main(args: Array<String>) {
             { Day20() },
             { Day21() },
             { Day22() },
-            { Day23() }
+            { Day23() },
+            { Day23() }, //TODO
+            { Day25() }
     )
 //    days.forEachIndexed { i, it -> logDay(i + 1, it) }
     val i = 23

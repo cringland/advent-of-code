@@ -1,6 +1,7 @@
 package day23
 
 import Day
+import java.io.File
 import java.util.*
 import kotlin.math.abs
 
@@ -14,7 +15,6 @@ class Day23 : Day {
         }
     }
 
-    // each list is 2 or 4, hall is 11
     data class State(val a: List<Char>, val b: List<Char>, val c: List<Char>, val d: List<Char>, val hall: List<Char>) {
 
         companion object {
@@ -114,22 +114,39 @@ class Day23 : Day {
         fun isComplete(): Boolean = a.all { it == 'A' } && b.all { it == 'B' } && c.all { it == 'C' } && d.all { it == 'D' }
     }
 
-//    private val initialStateP1 = State(listOf('B', 'A'), listOf('C', 'D'), listOf('B', 'C'), listOf('D', 'A'), List(11) { '.' })
-    private val initialStateP1 = State(listOf('C', 'B'), listOf('D', 'A'), listOf('D', 'B'), listOf('A', 'C'), List(11) { '.' })
-    private val initialStateP2 = State(listOf('C', 'D', 'D', 'B'), listOf('D', 'C', 'B', 'A'), listOf('D', 'B', 'A', 'B'), listOf('A', 'A', 'C', 'C'), List(11) { '.' })
+    private val input = File("src/day23/input").readLines().filter { it.isNotEmpty() }
+            .mapNotNull { line ->
+                "(\\w)".toRegex().findAll(line).toList().map { it.value.first() }.let {
+                    if (it.isEmpty())
+                        null
+                    else
+                        State(listOf(it[0]), listOf(it[1]), listOf(it[2]), listOf(it[3]), listOf())
+                }
+            }.let {
+                val f = it.first()
+                val s = it[1]
+                State(f.a + s.a, f.b + s.b, f.c + s.c, f.d + s.d, List(11) { '.' })
+            }
 
     override fun problemOne(): Long {
-        return findShortest(initialStateP1)
+        return findShortest(input)
 
     }
 
     override fun problemTwo(): Long {
-        return findShortest(initialStateP2)
+        fun List<Char>.inserting(c1: Char, c2: Char): List<Char> = listOf(this.first(), c1, c2, this.last())
+        val input2 = State(
+                input.a.inserting('D', 'D'),
+                input.b.inserting('C', 'B'),
+                input.c.inserting('B', 'A'),
+                input.d.inserting('A', 'C'),
+                input.hall
+        )
+        return findShortest(input2)
     }
 
     private fun findShortest(start: State): Long {
         val processed = mutableSetOf<State>()
-        val totals = mutableSetOf<Total>()
         val toProcess = PriorityQueue<Total>()
         toProcess.offer(Total(0, start))
 
