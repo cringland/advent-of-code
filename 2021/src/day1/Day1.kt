@@ -1,27 +1,19 @@
 package day1
 
-import java.io.File
 import Day
+import java.io.File
 
 class Day1 : Day {
     private val input = File("src/day1/input").readLines().map(String::toLong)
 
     override fun problemOne(): Int {
-        return countIncrements(input)
+        return input.countIncrements()
     }
 
     override fun problemTwo(): Int {
-        val slidingWindowSums = input.dropLast(2).mapIndexed { i, value -> value + input[i + 1] + input[i + 2] }
-        return countIncrements(slidingWindowSums)
+        return input.dropLast(2).mapIndexed { i, value -> value + input[i + 1] + input[i + 2] }.countIncrements()
     }
 
-    private fun countIncrements(array: List<Long>): Int {
-        var count = 0;
-        for (i in 0 until array.size - 1) {
-            if (array[i] < array[i + 1]) {
-                count++
-            }
-        }
-        return count;
-    }
+    private fun List<Long>.countIncrements(): Int = this.zipWithNext()
+            .fold(0) { acc, pair -> if (pair.first < pair.second) acc + 1 else acc }
 }

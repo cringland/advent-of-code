@@ -1,11 +1,10 @@
 package day2
 
-import java.io.File
 import Day
+import java.io.File
 
 class Day2 : Day {
-    private val input = File("src/day2/input").readLines().filter { it.isNotEmpty() }
-    private val inputAsPairs = input.map {
+    private val inputAsPairs = File("src/day2/input").readLines().filter { it.isNotEmpty() }.map {
         when {
             it.startsWith("forward") -> Pair(getNum(it), 0)
             it.startsWith("down") -> Pair(0, getNum(it))
