@@ -7,18 +7,17 @@ class Day1 : Day {
     private val input = File("src/day1/input").readText()
             .split("\n\n").map {  
                 it.lines()
-                        .filter { s -> s.isNotEmpty() }
-                        .map(String::toLong) 
+                        .filter(String::isNotEmpty)
+                        .sumBy(String::toInt)
             }
-            .map { it.sum() }
             .sortedDescending()
     
 
-    override fun problemOne(): Long {
+    override fun problemOne(): Int {
         return input[0]
     }
 
-    override fun problemTwo(): Long {
+    override fun problemTwo(): Int {
         return input[0] + input[1] + input[2]
     }
 }
