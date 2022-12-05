@@ -5,58 +5,49 @@ import java.io.File
 import java.util.*
 
 class Day5 : Day {
-    private val input = File("src/day5/input").readLines().filter { it.isNotEmpty() }
-            .map {
-                it.split("move ", " from ", " to ").filter(String::isNotEmpty).map(String::toInt)
-            }
 
-    private fun testStacks(): List<Stack<Char>> {
-        return listOf(
-                stack("NZ"),
-                stack("DCM"),
-                stack("P")
-        )
-    }
+    data class Rule(val amount: Int, val from: Int, val to: Int)
+
+    private val input = File("src/day5/input").readText().split("\n\n")
 
     private fun stacks(): List<Stack<Char>> {
-        return listOf(
-                stack("MSJLVFNR"),
-                stack("HWJFZDNP"),
-                stack("GDCRW"),
-                stack("SBN"),
-                stack("NFBCPWZM"),
-                stack("WMRP"),
-                stack("WSLGNTR"),
-                stack("VBNFHTQ"),
-                stack("FNZHML")
-        )
+        val lines = input[0].lines().takeWhile { !it.contains('1') }
+        val cols = lines.last().count { it == '[' }
+        val words = (0 until cols).map { x ->
+            lines.fold("") { acc, str ->
+                acc + str[1 + (x * 4)]
+            }.replace(" ", "")
+        }
+        return words.map { stack(it) }
     }
+
+    private val rules = input[1].lines().filter(String::isNotEmpty)
+            .map {
+                val nums = it.split("move ", " from ", " to ").filter(String::isNotEmpty).map(String::toInt)
+                Rule(nums[0], nums[1] - 1, nums[2] - 1)
+            }
 
     override fun problemOne(): String {
         val stacks = stacks()
-        input.forEach { nums ->
-            val from = nums[1] - 1
-            val to = nums[2] - 1
-            val amount = nums[0]
-            for (i in 1..amount) {
-                stacks[to].push(stacks[from].pop())
+        rules.forEach { rule ->
+            repeat(rule.amount) {
+                stacks[rule.to].push(stacks[rule.from].pop())
             }
         }
-        return stacks.map { it.peek() }.joinToString(separator = "")
+        return stacks.joinFirst()
     }
 
     override fun problemTwo(): String {
         val stacks = stacks()
-        input.forEach { nums ->
-            val from = nums[1] - 1
-            val to = nums[2] - 1
-            val amount = nums[0]
-            (1..amount).map {
-                stacks[from].pop()
-            }.reversed().forEach { item -> stacks[to].push(item) }
+        rules.forEach { rule ->
+            (1..rule.amount).map {
+                stacks[rule.from].pop()
+            }.reversed().forEach { item -> stacks[rule.to].push(item) }
         }
-        return stacks.map { it.peek() }.joinToString(separator = "")
+        return stacks.joinFirst()
     }
+
+    fun List<Stack<Char>>.joinFirst(): String = this.map { it.peek() }.joinToString(separator = "")
 
     private fun stack(word: String): Stack<Char> {
         val stack = Stack<Char>()

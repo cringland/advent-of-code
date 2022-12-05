@@ -14,10 +14,10 @@ class Day1 : Day {
     
 
     override fun problemOne(): Int {
-        return input[0]
+        return input.first()
     }
 
     override fun problemTwo(): Int {
-        return input[0] + input[1] + input[2]
+        return input.take(3).sum()
     }
 }
