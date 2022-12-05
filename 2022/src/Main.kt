@@ -1,8 +1,8 @@
-import day3.Day3
+import day5.Day5
 
 fun main(args: Array<String>) {
     val days = listOf(
-            { Day3() }
+            { Day5() }
     )
     days.forEachIndexed { i, it -> logDay(i + 1, it) }
 }
