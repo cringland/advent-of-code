@@ -1,10 +1,9 @@
 package day3
 
 import Day
-import java.io.File
 
 class Day3 : Day {
-    private val input = File("src/day3/input").readLines()
+    private val input = inputFile().readLines()
 
     private val priority: (Char) -> Int = { if (it.isLowerCase()) it.toInt() - 96 else it.toInt() - 3 }
 

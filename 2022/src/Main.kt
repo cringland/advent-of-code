@@ -4,16 +4,18 @@ import day3.Day3
 import day4.Day4
 import day5.Day5
 import day6.Day6
+import day7.Day7
 
 fun main(args: Array<String>) {
-    val currentDay = 6
+    val currentDay = 7
     val days = listOf(
             { Day1() },
             { Day2() },
             { Day3() },
             { Day4() },
             { Day5() },
-            { Day6() }
+            { Day6() },
+            { Day7() }
     )
 //    days.forEachIndexed { i, it -> logDay(i + 1, it) }
     logDay(currentDay - 1, days[currentDay - 1])

@@ -1,11 +1,10 @@
 package day6
 
 import Day
-import java.io.File
 
 class Day6 : Day {
 
-    private val input = File("src/day6/input").readText()
+    private val input = inputFile().readText()
 
     override fun problemOne(): Int {
         return input.findFirstUnique(4)

@@ -1,14 +1,13 @@
 package day5
 
 import Day
-import java.io.File
 import java.util.*
 
 class Day5 : Day {
 
     data class Rule(val amount: Int, val from: Int, val to: Int)
 
-    private val input = File("src/day5/input").readText().split("\n\n")
+    private val input = inputFile().readText().split("\n\n")
 
     private fun stacks(): List<Stack<Char>> {
         val lines = input[0].lines().takeWhile { !it.contains('1') }
