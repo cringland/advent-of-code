@@ -6,8 +6,12 @@ class Day7 : Day {
     class Dir(val path: String, val name: String, val parent: Dir?, var files: Map<String, Long> = emptyMap(), var dirs: Map<String, Dir> = emptyMap()) {
         fun size(): Long = files.values.sum() + dirs.values.map { it.size() }.sum()
         fun findDirByPath(str: String): Dir? {
-            return if (str == this.path) this
-            else dirs.values.find { it.findDirByPath(str) != null }?.findDirByPath(str)
+            if (str == this.path) return this
+            for (dir in dirs.values) {
+                val t = dir.findDirByPath(str)
+                if (t != null) return t
+            }
+            return null
         }
 
         fun findAll(predicate: (Dir) -> Boolean): List<Dir> {
@@ -25,44 +29,30 @@ class Day7 : Day {
         }
     }
 
-    val root = fileSystem()
-
-    fun fileSystem(): Dir {
-        val root = Dir("/", "/", null)
-        var cwd = "/"
-        var currentDir = root
+    private val root: Dir = Dir("/", "/", null).let {
+        var currentDir = it
         inputFile().readText().split("$ ").filter(String::isNotEmpty).drop(1) // drop cd /
                 .forEach { cmd ->
                     if (cmd.startsWith("cd")) {
                         val dir = cmd.trim().split(" ")[1]
-                        when (dir) {
-                            ".." -> {
-                                cwd = cwd.dropLast(1).dropLastWhile { d -> d != '/' }
-                                currentDir = currentDir.parent!!
-                            }
-                            else -> {
-                                cwd = "$cwd$dir/"
-                                currentDir = root.findDirByPath(cwd)!!
-                            }
+                        currentDir = when (dir) {
+                            ".." -> currentDir.parent!!
+                            else -> currentDir.findDirByPath("${currentDir.path}$dir/")!!
                         }
-                    } else { // ls
-                        val allFiles = cmd.trim().split("\n").drop(1)
-                                .groupBy { file ->
-                                    if (file.startsWith("dir"))
-                                        "DIR"
-                                    else "FILE"
+                    } else {
+                        cmd.trim().split("\n").drop(1)
+                                .forEach { file ->
+                                    if (file.startsWith("dir")) {
+                                        val dir = file.split(" ")[1]
+                                        currentDir.addDir(Dir("${currentDir.path}$dir/", dir, currentDir))
+                                    } else {
+                                        val temp = file.split(" ")
+                                        currentDir.addFile(temp[1] to temp[0].toLong())
+                                    }
                                 }
-                        allFiles["DIR"]?.map { dir -> dir.split(" ")[1] }
-                                ?.forEach { dir ->
-                                    currentDir.addDir(Dir("$cwd$dir/", dir, currentDir))
-                                }
-                        allFiles["FILE"]?.map { file ->
-                            val sp = file.split(" ")
-                            sp[1] to sp[0].toLong()
-                        }?.forEach { file -> currentDir.addFile(file) }
                     }
                 }
-        return root
+        it
     }
 
     override fun problemOne(): Long {
@@ -70,10 +60,9 @@ class Day7 : Day {
     }
 
     override fun problemTwo(): Long {
-        val total = 70000000
-        val req = 30000000
+        val req = 40000000
         val totalUsed = root.size()
-        val needed = totalUsed - (total - req)
+        val needed = totalUsed - req
         return root.findAll { true }.map { it.size() }.filter { it >= needed }.min()!!
     }
 }

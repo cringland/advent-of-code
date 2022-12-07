@@ -6,7 +6,7 @@ import java.util.*
 
 class Day25 : Day {
 
-    val input = File("src/day25/input").readLines().filter { it.isNotEmpty() }
+    val input = inputFile().readLines().filter { it.isNotEmpty() }
 //            .map { it.toCharArray().toList() }
 
     override fun problemOne(): Int {

@@ -6,7 +6,7 @@ import java.io.File
 
 class Day16 : Day {
 
-    private val inputPacket = File("src/day16/input").readText().replace("\n", "")
+    private val inputPacket = inputFile().readText().replace("\n", "")
             .hexToBinaryString().extractPacket().second
 
     override fun problemOne(): Int {

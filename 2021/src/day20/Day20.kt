@@ -7,7 +7,7 @@ import java.io.File
 class Day20 : Day {
 
 
-    private val input = File("src/day20/input").readLines().filter { it.isNotEmpty() }
+    private val input = inputFile().readLines().filter { it.isNotEmpty() }
     private val algorithm = input.first().map { c -> c == '#' }
     private val image = input.drop(1).map { it.map { c -> c == '#' } }
     private var infinite = false

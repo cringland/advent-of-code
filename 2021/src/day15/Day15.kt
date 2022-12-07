@@ -14,7 +14,7 @@ class Day15 : Day {
         }
     }
 
-    private val input = File("src/day15/input").readLines().filter(String::isNotEmpty).map { column ->
+    private val input = inputFile().readLines().filter(String::isNotEmpty).map { column ->
         column.toCharArray().map(Character::getNumericValue)
     }
 

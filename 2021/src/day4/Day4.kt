@@ -1,10 +1,9 @@
 package day4
 
-import java.io.File
 import Day
 
 class Day4 : Day {
-    private val input = File("src/day4/input").readLines()
+    private val input = inputFile().readLines()
     private val numbers = input[0].split(",").map { Integer.valueOf(it) }
     private val boards = input.drop(1)
             .filter { it.isNotEmpty() }

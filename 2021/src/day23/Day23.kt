@@ -114,7 +114,7 @@ class Day23 : Day {
         fun isComplete(): Boolean = a.all { it == 'A' } && b.all { it == 'B' } && c.all { it == 'C' } && d.all { it == 'D' }
     }
 
-    private val input = File("src/day23/input").readLines().filter { it.isNotEmpty() }
+    private val input = inputFile().readLines().filter { it.isNotEmpty() }
             .mapNotNull { line ->
                 "(\\w)".toRegex().findAll(line).toList().map { it.value.first() }.let {
                     if (it.isEmpty())

@@ -1,10 +1,9 @@
 package day3
 
-import java.io.File
 import Day
 
 class Day3 : Day {
-    private val input = File("src/day3/input").readLines().filter { it.isNotEmpty() }
+    private val input = inputFile().readLines().filter { it.isNotEmpty() }
             .map { it.toList().map(Character::getNumericValue) }
 
     override fun problemOne(): Int {
@@ -14,11 +13,11 @@ class Day3 : Day {
     }
 
     override fun problemTwo(): Int {
-        val oxygen = getMostLike { ones, zeros -> ones >= zeros}
-        val co2 = getMostLike { ones, zeros -> ones < zeros}
+        val oxygen = getMostLike { ones, zeros -> ones >= zeros }
+        val co2 = getMostLike { ones, zeros -> ones < zeros }
         return oxygen.binaryToDecimal() * co2.binaryToDecimal()
     }
-    
+
     fun getMostLike(onesToZerosCompare: (Int, Int) -> Boolean): List<Int> {
         var list = input
         var i = 0;

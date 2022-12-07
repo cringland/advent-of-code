@@ -5,7 +5,7 @@ import java.io.File
 import java.util.*
 
 class Day24 : Day {
-    val input = File("src/day24/input").readLines().filter { it.isNotEmpty() }.chunked(18)
+    val input = inputFile().readLines().filter { it.isNotEmpty() }.chunked(18)
 
     fun run(part2: Boolean): Long {
         val result = MutableList(14) { -1 }

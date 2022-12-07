@@ -1,10 +1,9 @@
 package day5
 
-import java.io.File
 import Day
 
 class Day5 : Day {
-    private val input = File("src/day5/input").readLines().filter(String::isNotEmpty).map(::Line)
+    private val input = inputFile().readLines().filter(String::isNotEmpty).map(::Line)
 
     override fun problemOne(): Int {
         return input.filter { !it.isDiagonal }.greaterThan2Count()
@@ -14,7 +13,7 @@ class Day5 : Day {
         return input.greaterThan2Count()
     }
 
-    private fun List<Line>.greaterThan2Count(): Int  {
+    private fun List<Line>.greaterThan2Count(): Int {
         return flatMap { it.points }.groupingBy { it }.eachCount().filter { it.value >= 2 }.count()
     }
 

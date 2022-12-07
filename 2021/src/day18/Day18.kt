@@ -6,7 +6,7 @@ import kotlin.test.assertEquals
 
 class Day18 : Day {
 
-    private val input = File("src/day18/input").readLines().filter(String::isNotEmpty)
+    private val input = inputFile().readLines().filter(String::isNotEmpty)
 
     override fun problemOne(): Int {
         var currentStr = input.first()

@@ -27,7 +27,7 @@ class Day19 : Day {
             { it -> Point3(it.y, -it.x, it.z) }
     )
 
-    private val input = File("src/day19/input").readText().split("--- scanner \\d+ ---".toRegex())
+    private val input = inputFile().readText().split("--- scanner \\d+ ---".toRegex())
             .filter { it.isNotEmpty() }
             .map {
                 it.split("\n").filter(String::isNotEmpty).map { str ->

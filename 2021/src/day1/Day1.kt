@@ -1,10 +1,9 @@
 package day1
 
 import Day
-import java.io.File
 
 class Day1 : Day {
-    private val input = File("src/day1/input").readLines().map(String::toLong)
+    private val input = inputFile().readLines().map(String::toLong)
 
     override fun problemOne(): Int {
         return input.countIncrements()

@@ -1,10 +1,9 @@
 package day8
 
 import Day
-import java.io.File
 
 class Day8 : Day {
-    private val input = File("src/day8/input").readLines().map { line ->
+    private val input = inputFile().readLines().map { line ->
         val split = line.split("|").map { it.trim().split(" ").map(String::toCharArray).map(CharArray::toList) }
         split[0] to split[1]
     }

@@ -4,7 +4,7 @@ import Day
 import java.io.File
 
 class Day13 : Day {
-    private val input = File("src/day13/input").readText().split("\n\n")
+    private val input = inputFile().readText().split("\n\n")
     private val coords = input[0].split("\n").map { val (x, y) = it.split(","); x.toInt() to y.toInt() }.toSet()
     private val folds = input[1].split("\n").filter { it.isNotEmpty() }.map {
         val (xy, value) = it.split(" ")[2].split("=")

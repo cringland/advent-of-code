@@ -1,11 +1,10 @@
 package day6
 
-import java.io.File
 import Day
 import java.util.*
 
 class Day6 : Day {
-    private val initialState = File("src/day6/input").readText().split(",").map { it.trim().toInt() }
+    private val initialState = inputFile().readText().split(",").map { it.trim().toInt() }
 
     override fun problemOne(): Int {
         var state = initialState

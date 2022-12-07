@@ -5,7 +5,7 @@ import java.io.File
 import java.util.*
 
 class Day10 : Day {
-    private val lines = File("src/day10/input").readLines().map { Line(it) }
+    private val lines = inputFile().readLines().map { Line(it) }
 
 
     override fun problemOne(): Int {

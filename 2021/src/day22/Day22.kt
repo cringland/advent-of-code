@@ -20,7 +20,7 @@ class Day22 : Day {
 
     private val pattern = """(on|off) x=(-?\d+)\.\.(-?\d+),y=(-?\d+)\.\.(-?\d+),z=(-?\d+)\.\.(-?\d+)""".toRegex()
 
-    private val cuboids = File("src/day22/input").readLines()
+    private val cuboids = inputFile().readLines()
             .filter { it.isNotEmpty() }
             .map { str ->
                 val (on, x1, x2, y1, y2, z1, z2) = pattern.matchEntire(str)!!.destructured

@@ -4,7 +4,7 @@ import Day
 import java.io.File
 
 class Day14 : Day {
-    private val input = File("src/day14/input").readLines()
+    private val input = inputFile().readLines()
     private val startState: Map<String, Long> = input.first().zipWithNext { a, b -> "" + a + b }
             .fold(mutableMapOf<String, Long>()) { map, it ->
                 map.add(it, 1)

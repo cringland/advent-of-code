@@ -1,11 +1,9 @@
 package day7
 
-import java.io.File
 import Day
-import java.util.*
 
 class Day7 : Day {
-    private val input = File("src/day7/input").readText().split(",").map { it.trim().toInt() }
+    private val input = inputFile().readText().split(",").map { it.trim().toInt() }
     private val max = input.max()!!
     private val min = input.min()!!
 

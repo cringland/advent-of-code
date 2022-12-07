@@ -1,7 +1,6 @@
 package day9
 
 import Day
-import java.io.File
 
 class Day9 : Day {
     private val dirs = listOf<(Int, Int) -> Pair<Int, Int>>(
@@ -10,7 +9,7 @@ class Day9 : Day {
             { x, y -> Pair(x, y - 1) },
             { x, y -> Pair(x, y + 1) })
 
-    private val input = File("src/day9/input").readLines()
+    private val input = inputFile().readLines()
             .map { line -> line.toCharArray().map(Character::getNumericValue) }
 
     private val mins = input.mapIndexed { x, it ->

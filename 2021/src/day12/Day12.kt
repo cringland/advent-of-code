@@ -8,7 +8,7 @@ private fun String.isSmall(): Boolean {
 }
 
 class Day12 : Day {
-    private val caveConnections: List<Pair<String, String>> = File("src/day12/input").readLines()
+    private val caveConnections: List<Pair<String, String>> = inputFile().readLines()
             .flatMap {
                 val split = it.split("-")
                 when {

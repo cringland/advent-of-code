@@ -4,7 +4,7 @@ import Day
 import java.io.File
 
 class Day11 : Day {
-    private val matrix = File("src/day11/input").readLines().map { it.toCharArray().map(Character::getNumericValue) }
+    private val matrix = inputFile().readLines().map { it.toCharArray().map(Character::getNumericValue) }
 
     override fun problemOne(): Int {
         val state = matrix.map { it.toMutableList() }.toMutableList()
