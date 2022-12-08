@@ -6,13 +6,8 @@ class Day6 : Day {
 
     private val input = inputFile().readText()
 
-    override fun problemOne(): Int {
-        return input.findFirstUnique(4)
-    }
-
-    override fun problemTwo(): Int {
-        return input.findFirstUnique(14)
-    }
+    override fun problemOne(): Int = input.findFirstUnique(4)
+    override fun problemTwo(): Int = input.findFirstUnique(14)
 
     private fun String.findFirstUnique(len: Int): Int {
         for (i in 0 until this.length - len) {

@@ -11,11 +11,6 @@ class Day1 : Day {
             }
             .sortedDescending()
 
-    override fun problemOne(): Int {
-        return input.first()
-    }
-
-    override fun problemTwo(): Int {
-        return input.take(3).sum()
-    }
+    override fun problemOne(): Int = input.first()
+    override fun problemTwo(): Int = input.take(3).sum()
 }

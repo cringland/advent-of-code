@@ -3,7 +3,7 @@ package day7
 import Day
 
 class Day7 : Day {
-    class Dir(val path: String, val name: String, val parent: Dir?, var files: Map<String, Long> = emptyMap(), var dirs: Map<String, Dir> = emptyMap()) {
+    class Dir(val path: String, val parent: Dir?, var files: Map<String, Long> = emptyMap(), var dirs: Map<String, Dir> = emptyMap()) {
         fun size(): Long = files.values.sum() + dirs.values.map { it.size() }.sum()
         fun findDirByPath(str: String): Dir? {
             if (str == this.path) return this
@@ -29,7 +29,7 @@ class Day7 : Day {
         }
     }
 
-    private val root: Dir = Dir("/", "/", null).let {
+    private val root: Dir = Dir("/", null).let {
         var currentDir = it
         inputFile().readText().split("$ ").filter(String::isNotEmpty).drop(1) // drop cd /
                 .forEach { cmd ->
@@ -44,7 +44,7 @@ class Day7 : Day {
                                 .forEach { file ->
                                     if (file.startsWith("dir")) {
                                         val dir = file.split(" ")[1]
-                                        currentDir.addDir(Dir("${currentDir.path}$dir/", dir, currentDir))
+                                        currentDir.addDir(Dir("${currentDir.path}$dir/", currentDir))
                                     } else {
                                         val temp = file.split(" ")
                                         currentDir.addFile(temp[1] to temp[0].toLong())

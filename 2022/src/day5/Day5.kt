@@ -46,7 +46,7 @@ class Day5 : Day {
         return stacks.joinFirst()
     }
 
-    fun List<Stack<Char>>.joinFirst(): String = this.map { it.peek() }.joinToString(separator = "")
+    private fun List<Stack<Char>>.joinFirst(): String = this.map { it.peek() }.joinToString(separator = "")
 
     private fun stack(word: String): Stack<Char> {
         val stack = Stack<Char>()
