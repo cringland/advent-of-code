@@ -17,21 +17,19 @@ class Day9 : Day {
 
     }
 
-    override fun problemOne(): Int = solve(2)
+    override fun problemOne(): Number = solve(2)
     override fun problemTwo(): Number = solve(10)
 
     private fun solve(ropeSize: Int): Int {
         var rope = List(ropeSize) { 0 by 0 }
-        var lastHead = rope.first()
+        var previous = rope.first()
         return input.fold(mutableSetOf(0 by 0)) { acc, change ->
-            rope = rope.mapIndexed { i, p ->
-                val isFirst = i == 0
-                val isLast = i == rope.size - 1
-                if (isFirst) {
-                    lastHead = p + change
-                    lastHead
+            rope = rope.mapIndexed { i, current ->
+                if (i == 0) {
+                    previous = current + change
+                    previous
                 } else {
-                    val diff = lastHead - p
+                    val diff = previous - current
                     // There must be a formula here somewhere
                     val x = if (diff.x == 2 || (diff.x == 1 && (diff.y > 1 || diff.y < -1))) 1
                     else if (diff.x == -2 || (diff.x == -1 && (diff.y > 1 || diff.y < -1))) -1
@@ -40,11 +38,10 @@ class Day9 : Day {
                     val y = if (diff.y == 2 || (diff.y == 1 && (diff.x > 1 || diff.x < -1))) 1
                     else if (diff.y == -2 || (diff.y == -1 && (diff.x > 1 || diff.x < -1))) -1
                     else 0
-                    val new = p + (x by y)
-                    if (isLast) {
-                        acc.add(new)
-                    }
-                    lastHead = new
+
+                    val new = current + (x by y)
+                    if (i == rope.size - 1) acc.add(new)
+                    previous = new
                     new
                 }
             }
