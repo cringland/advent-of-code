@@ -1,6 +1,7 @@
 package day9
 
 import Day
+import util.by
 
 class Day9 : Day {
     private val input = inputFile().readLines().filter(String::isNotEmpty).flatMap {
@@ -49,10 +50,3 @@ class Day9 : Day {
         }.size
     }
 }
-
-data class Point2(val x: Int, val y: Int) {
-    operator fun plus(that: Point2): Point2 = (this.x + that.x) by (this.y + that.y)
-    operator fun minus(that: Point2): Point2 = (this.x - that.x) by (this.y - that.y)
-}
-
-infix fun Int.by(that: Int): Point2 = Point2(this, that)
