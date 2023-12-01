@@ -36,7 +36,7 @@ class Day15 : Day {
     fun dijkstraDistance(graph: Map<Point2, List<Pair<Point2, Int>>>, from: Point2, to: Point2): Int {
         val processed = mutableSetOf<Point2>()
         val toProcess = PriorityQueue<Temp>()
-        toProcess.offer(Temp(0, 0, 0))
+        toProcess.offer(Temp(from.x, from.y, 0))
 
         while (toProcess.isNotEmpty()) {
             val u = toProcess.poll()
