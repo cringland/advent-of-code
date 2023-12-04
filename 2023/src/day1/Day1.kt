@@ -21,8 +21,6 @@ class Day1 : Day {
                 .findAll(it).first().groupValues.first().toDigitString()
             val last = "^.*(\\d|one|two|three|four|five|six|seven|eight|nine)".toRegex().findAll(it)
                 .last().groupValues.last().toDigitString()
-
-//            println("${it} - $first - $last")
             (first + last).toInt()
         }
     }

@@ -30,19 +30,19 @@ class Day3 : Day {
 
 
     override fun problemOne(): Number {
-        val correctNumbers = adjacaentMatches { c -> !(c.isDigit() || c == '.')}
+        val correctNumbers = adjacentMatches { c -> !(c.isDigit() || c == '.')}
         return correctNumbers.sumBy { it.first.value }
     }
 
     override fun problemTwo(): Number {
-        val correctNumbers = adjacaentMatches { c -> c == '*' }
+        val correctNumbers = adjacentMatches { c -> c == '*' }
         return correctNumbers
             .groupBy { it.second }
             .filter { it.value.size == 2 }
             .values.sumBy { it.first().first.value * it[1].first.value }
     }
 
-    private fun adjacaentMatches(charCheck: (Char) -> Boolean) = posRanges.mapNotNull {
+    private fun adjacentMatches(charCheck: (Char) -> Boolean) = posRanges.mapNotNull {
         it.adjacents().firstOrNull { p ->
             if (p.y < 0 || p.x < 0 || p.y >= input.size || p.x >= input[p.y].length)
                 false
