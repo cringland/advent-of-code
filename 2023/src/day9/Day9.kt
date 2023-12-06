@@ -1,7 +1,6 @@
 package day9
 
 import Day
-import util.by
 
 class Day9 : Day {
     private val input = inputFile().readLines()
