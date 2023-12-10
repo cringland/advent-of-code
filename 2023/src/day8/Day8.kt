@@ -22,14 +22,16 @@ class Day8 : Day {
     override fun problemTwo(): Number {
         val values = map.keys.filter { it.endsWith('A') }
             .map { startKey -> solve(startKey) { it.endsWith('Z') } }
-        return lcm(values)
+        return values.lcm()
     }
 
-    private fun lcm(list: List<Long>): Long {
-        val largest = list.max()!!
+    private fun List<Long>.lcm() = this.sorted().reduce { v1, v2 -> v1.lcm(v2) }
+
+    private fun Long.lcm(that: Long): Long {
+        val largest = this.coerceAtLeast(that)
         var lcm = largest
-        while(true) {
-            if (list.all { (lcm % it) == 0L })
+        while (true) {
+            if (((lcm % this) == 0L) && ((lcm % that) == 0L))
                 return lcm
             lcm += largest
         }
