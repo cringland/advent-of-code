@@ -1,11 +1,8 @@
 package day11
 
 import Day
-import util.Point2
 import util.by
 import kotlin.math.abs
-
-typealias InputGrid = List<String>
 
 class Day11 : Day {
     private val input = inputFile().readLines()
