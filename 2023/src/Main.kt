@@ -25,7 +25,7 @@ import day8.Day8
 import day9.Day9
 
 fun main() {
-    val currentDay = 12
+    val currentDay = 13
     val days = listOf(
         { Day1() },
         { Day2() },
