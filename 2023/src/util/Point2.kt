@@ -11,7 +11,6 @@ val diagDirs = listOf<(Int, Int) -> Point2>(
     { x, y -> Point2(x + 1, y + 1) },
     { x, y -> Point2(x + 1, y - 1) },
     { x, y -> Point2(x - 1, y + 1) })
-
 data class Point2(val x: Int, val y: Int) : Comparable<Point2> {
     fun adjacent(): List<Point2> = adjDirs.map { it(x, y) }.sorted()
 
