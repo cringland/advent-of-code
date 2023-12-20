@@ -1,6 +1,7 @@
 package day8
 
 import Day
+import util.lcm
 import java.util.concurrent.locks.Condition
 import kotlin.math.max
 
@@ -23,18 +24,6 @@ class Day8 : Day {
         val values = map.keys.filter { it.endsWith('A') }
             .map { startKey -> solve(startKey) { it.endsWith('Z') } }
         return values.lcm()
-    }
-
-    private fun List<Long>.lcm() = this.sorted().reduce { v1, v2 -> v1.lcm(v2) }
-
-    private fun Long.lcm(that: Long): Long {
-        val largest = this.coerceAtLeast(that)
-        var lcm = largest
-        while (true) {
-            if (((lcm % this) == 0L) && ((lcm % that) == 0L))
-                return lcm
-            lcm += largest
-        }
     }
 
     private fun solve(startKey: String, endCondition: (String) -> Boolean): Long {

@@ -2,84 +2,76 @@ package day16
 
 import Day
 import util.*
+
 class Day16 : Day {
-    private val UP = Point2(0, - 1)
-    private val DOWN = Point2(0, 1)
-    private val LEFT = Point2(-1, 0)
-    private val RIGHT = Point2(1, 0)
+    private val dirMap = mapOf('U' to up, 'L' to left, 'D' to down, 'R' to right)
 
 
     private val input = inputFile().readLines()
-    private fun List<String>.get(p :Point2): Char? = this.getOrNull(p.y)?.getOrNull(p.x)
-    private val DIRMAP = mapOf('U' to UP, 'L' to LEFT, 'D' to DOWN, 'R' to RIGHT)
+    private fun List<String>.get(p: Point2): Char? = this.getOrNull(p.y)?.getOrNull(p.x)
 
-    private fun energise(dir: Char, start: Point2, seenPoints: MutableSet<Point2>, seenCombos: MutableSet<Pair<Point2, Char>>) {
-//        printPoints(seenPoints)
-        val currentChar = input.get(start) ?: return
-        if (seenCombos.contains(start to dir)) return
+    private fun energise(
+        dir: Char,
+        start: Point2,
+        seenCombos: MutableSet<Pair<Point2, Char>>
+    ): Int {
+        val currentChar = input.get(start) ?: return 0
+        if (seenCombos.contains(start to dir)) return 0
         seenCombos.add(start to dir)
-        seenPoints.add(start)
-        when (dir) {
-            'U' -> when(currentChar) {
-                '/' -> energise('R', DIRMAP['R']!! + start, seenPoints, seenCombos)
-                '\\' -> energise('L', DIRMAP['L']!! + start, seenPoints, seenCombos)
-                '-' -> {
-                    energise('L', DIRMAP['L']!! + start, seenPoints, seenCombos)
-                    energise('R', DIRMAP['R']!! + start, seenPoints, seenCombos)
-                }
-                else -> energise(dir, DIRMAP[dir]!! + start, seenPoints, seenCombos)
+
+        val nextPoints = when (dir) {
+            'U' -> when (currentChar) {
+                '/' -> listOf('R' to dirMap['R']!! + start)
+                '\\' -> listOf('L' to dirMap['L']!! + start)
+                '-' -> listOf('L' to dirMap['L']!! + start, 'R' to dirMap['R']!! + start)
+                else -> listOf(dir to dirMap[dir]!! + start)
             }
-            'D' -> when(currentChar) {
-                '/' -> energise('L', DIRMAP['L']!! + start, seenPoints, seenCombos)
-                '\\' -> energise('R', DIRMAP['R']!! + start, seenPoints, seenCombos)
-                '-' -> {
-                    energise('L', DIRMAP['L']!! + start, seenPoints, seenCombos)
-                    energise('R', DIRMAP['R']!! + start, seenPoints, seenCombos)
-                }
-                else -> energise(dir, DIRMAP[dir]!! + start, seenPoints, seenCombos)
+
+            'D' -> when (currentChar) {
+                '/' -> listOf('L' to dirMap['L']!! + start)
+                '\\' -> listOf('R' to dirMap['R']!! + start)
+                '-' -> listOf('L' to dirMap['L']!! + start, 'R' to dirMap['R']!! + start)
+                else -> listOf(dir to dirMap[dir]!! + start)
             }
-            'R' -> when(currentChar) {
-                '/' -> energise('U', DIRMAP['U']!! + start, seenPoints, seenCombos)
-                '\\' -> energise('D', DIRMAP['D']!! + start, seenPoints, seenCombos)
-                '|' -> {
-                    energise('U', DIRMAP['U']!! + start, seenPoints, seenCombos)
-                    energise('D', DIRMAP['D']!! + start, seenPoints, seenCombos)
-                }
-                else -> energise(dir, DIRMAP[dir]!! + start, seenPoints, seenCombos)
+
+            'R' -> when (currentChar) {
+                '/' -> listOf('U' to dirMap['U']!! + start)
+                '\\' -> listOf('D' to dirMap['D']!! + start)
+                '|' -> listOf('U' to dirMap['U']!! + start, 'D' to dirMap['D']!! + start)
+                else -> listOf(dir to dirMap[dir]!! + start)
             }
-            'L' -> when(currentChar) {
-                '/' -> energise('D', DIRMAP['D']!! + start, seenPoints, seenCombos)
-                '\\' -> energise('U', DIRMAP['U']!! + start, seenPoints, seenCombos)
-                '|' -> {
-                    energise('U', DIRMAP['U']!! + start, seenPoints, seenCombos)
-                    energise('D', DIRMAP['D']!! + start, seenPoints, seenCombos)
-                }
-                else -> energise(dir, DIRMAP[dir]!! + start, seenPoints, seenCombos)
+
+            else -> when (currentChar) {
+                '/' -> listOf('D' to dirMap['D']!! + start)
+                '\\' -> listOf('U' to dirMap['U']!! + start)
+                '|' -> listOf('U' to dirMap['U']!! + start, 'D' to dirMap['D']!! + start)
+                else -> listOf(dir to dirMap[dir]!! + start)
             }
         }
+        return 1 + nextPoints.sumBy { energise(it.first, it.second, seenCombos) }
     }
 
     override fun problemOne(): Number {
-        val seenPoints = mutableSetOf<Point2>()
-        energise('R', 0 by 0, seenPoints, mutableSetOf())
-        return seenPoints.size
+        val seenCombos = mutableSetOf<Pair<Point2, Char>>()
+        energise('R', 0 by 0, seenCombos)
+        return seenCombos.map { it.first }.toSet().size
     }
 
     override fun problemTwo(): Number {
-        return (input.indices.flatMap {y ->
-            listOf((0 by y) to 'R', (input.first().length-1 by y) to 'L')
+        return (input.indices.flatMap { y ->
+            listOf((0 by y) to 'R', (input.first().length - 1 by y) to 'L')
         } + input.first().indices.flatMap { x ->
-            listOf((x by 0) to 'D', (x by input.size-1) to 'U')
-        }).map {pair ->
-            val seenPoints = mutableSetOf<Point2>()
-            energise(pair.second, pair.first, seenPoints, mutableSetOf())
-            seenPoints.size
+            listOf((x by 0) to 'D', (x by input.size - 1) to 'U')
+        }).map { pair ->
+            val seenCombos = mutableSetOf<Pair<Point2, Char>>()
+            energise(pair.second, pair.first, seenCombos)
+            seenCombos.map { it.first }.toSet().size
         }.max()!!
     }
 
     fun printPoints(set: Set<Point2>) {
         input.forEachIndexed { y, s ->
-            s.indices.forEach{ x ->
+            s.indices.forEach { x ->
                 if (x by y in set) print("#") else print('.')
             }
             println()
