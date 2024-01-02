@@ -25,11 +25,7 @@ import day8.Day8
 import day9.Day9
 
 fun main() {
-<<<<<<< Updated upstream
-    val currentDay = 20
-=======
-    val currentDay = 17
->>>>>>> Stashed changes
+    val currentDay = 23
     val days = listOf(
         { Day1() },
         { Day2() },

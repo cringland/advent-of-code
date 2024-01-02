@@ -1,10 +1,10 @@
 package util
 
-val adjDirs = listOf<(Int, Int) -> Point2>(
-    { x, y -> Point2(x + 1, y) },
-    { x, y -> Point2(x, y + 1) },
-    { x, y -> Point2(x, y - 1) },
-    { x, y -> Point2(x - 1, y) })
+val adjDirs = mapOf<Dir, (Int, Int) -> Point2>(
+    Dir.R to { x, y -> Point2(x + 1, y) },
+    Dir.D to { x, y -> Point2(x, y + 1) },
+    Dir.U to { x, y -> Point2(x, y - 1) },
+    Dir.L to { x, y -> Point2(x - 1, y) })
 
 val diagDirs = listOf<(Int, Int) -> Point2>(
     { x, y -> Point2(x - 1, y - 1) },
@@ -17,8 +17,11 @@ val down = Point2(0, 1)
 val left = Point2(-1, 0)
 val right = Point2(1, 0)
 
+enum class Dir { L, R, D, U }
+
 data class Point2(val x: Int, val y: Int) : Comparable<Point2> {
-    fun adjacent(): List<Point2> = adjDirs.map { it(x, y) }.sorted()
+    fun adjacentWithDir(): List<Pair<Dir, Point2>> = adjDirs.map { it.key to it.value(x, y) }
+    fun adjacent(): List<Point2> = adjDirs.values.map { it(x, y) }.sorted()
 
     fun diagAdjacent(): List<Point2> = (diagDirs.map { it(x, y) } + this.adjacent()).sorted()
 

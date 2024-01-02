@@ -1,12 +1,12 @@
 package day17
 
 import Day
+import util.Dir
 import util.Point2
 import util.by
 import java.util.*
 
 private fun Point2.inBounds(input: List<List<Any>>) = this.y in input.indices && this.x in input[this.y].indices
-enum class Dir { L, R, D, U }
 
 class Day17 : Day {
     private val input = inputFile().readLines().map { line -> line.map { it.toString().toLong() } }
