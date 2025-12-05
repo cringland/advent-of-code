@@ -2,12 +2,20 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
 public class Input {
 
+    public record TwoString(String one, String two) {
+    }
+
+    public record TwoList(List<String> one, List<String> two) {
+    }
+
     private final Path path;
+    private final String string;
     private final List<String> lines;
 
     public static Input input(Class<? extends Day> clazz) {
@@ -21,6 +29,7 @@ public class Input {
     private Input(String resourcePath) {
         this.path = Path.of("src/resource/" + resourcePath);
         try {
+            this.string = Files.readString(path);
             this.lines = Files.readAllLines(path);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -50,6 +59,16 @@ public class Input {
 
     public String oneString() {
         return String.join("", lines);
+    }
+
+    public TwoString twoStrings() {
+        var strs = string.split("\n\n");
+        return new TwoString(strs[0], strs[1]);
+    }
+
+    public TwoList twoLists() {
+        var twoString = twoStrings();
+        return new TwoList(Arrays.stream(twoString.one.split("\n")).toList(), Arrays.stream(twoString.two.split("\n")).toList());
     }
 
     public Stream<Character> streamChars() {

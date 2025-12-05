@@ -7,7 +7,9 @@ public class Runner {
     public static final List<Day> DAYS = List.of(new Day1(),
             new Day2(),
             new Day3(),
-            new Day4());
+            new Day4(),
+            new Day5()
+    );
     private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ISO_LOCAL_TIME;
 
 
@@ -40,7 +42,7 @@ public class Runner {
         log("Part 1 done in %s ms : %s", p1Time, ChronoUnit.MILLIS.between(lastTime, p1Time), p1Answer);
         var p2Answer = day.part2(input);
         var p2Time = LocalDateTime.now();
-        log("Part 1 done in %s ms : %s", p2Time, ChronoUnit.MILLIS.between(lastTime, p2Time), p2Answer);
+        log("Part 2 done in %s ms : %s", p2Time, ChronoUnit.MILLIS.between(lastTime, p2Time), p2Answer);
     }
 
     public static void log(String s, LocalDateTime currentTime, Object... args) {
