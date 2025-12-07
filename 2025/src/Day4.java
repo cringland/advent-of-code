@@ -1,16 +1,16 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Day4 implements Day<Long> {
-    public Long sampleAnswerP1() {
+public class Day4 implements Day<Number> {
+    public Number sampleAnswerP1() {
         return 13L;
     }
 
-    public Long sampleAnswerP2() {
+    public Number sampleAnswerP2() {
         return 43L;
     }
 
-    public Long part1(Input input) {
+    public Number part1(Input input) {
         var lines = input.immutableLines();
         var count = 0L;
         for (int i = 0; i < lines.size(); i++) {
@@ -31,7 +31,7 @@ public class Day4 implements Day<Long> {
         return count;
     }
 
-    public Long part2(Input input) {
+    public Number part2(Input input) {
         var lines = input.mutableGrid();
         var count = 0L;
         var lastCount = 0L;

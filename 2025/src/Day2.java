@@ -1,25 +1,27 @@
+import util.Util;
+
 import java.util.*;
 import java.util.function.Predicate;
 
 
-public class Day2 implements Day<Long> {
+public class Day2 implements Day<Number> {
 
     record Range(long left, long right) {
     }
 
-    public Long sampleAnswerP1() {
+    public Number sampleAnswerP1() {
         return 1227775554L;
     }
 
-    public Long sampleAnswerP2() {
+    public Number sampleAnswerP2() {
         return 4174379265L;
     }
 
-    public Long part1(Input input) {
+    public Number part1(Input input) {
         return solve(input, Day2::isInvalid);
     }
 
-    public Long part2(Input input) {
+    public Number part2(Input input) {
         return solve(input, Day2::isInvalidP2);
     }
 

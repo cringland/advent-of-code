@@ -1,16 +1,16 @@
 import java.util.List;
 
-public class Day1 implements Day<Integer> {
+public class Day1 implements Day<Number> {
 
-    public Integer sampleAnswerP1() {
+    public Number sampleAnswerP1() {
         return 3;
     }
 
-    public Integer sampleAnswerP2() {
+    public Number sampleAnswerP2() {
         return 6;
     }
 
-    public Integer part1(Input input) {
+    public Number part1(Input input) {
         var start = 50;
         var total = 100;
         var zeroCount = 0;
@@ -32,7 +32,7 @@ public class Day1 implements Day<Integer> {
         return zeroCount;
     }
 
-    public Integer part2(Input input) {
+    public Number part2(Input input) {
         var start = 50;
         var total = 100;
         var zeroCount = 0;

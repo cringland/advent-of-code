@@ -1,8 +1,10 @@
+import util.Util;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
 
-public class Day5 implements Day<Long> {
+public class Day5 implements Day<Number> {
     record Range(long left, long right) {
         public boolean incRange(long num) {
             return num >= left && num <= right;
@@ -14,17 +16,17 @@ public class Day5 implements Day<Long> {
     }
 
     @Override
-    public Long sampleAnswerP1() {
-        return 3L;
+    public Number sampleAnswerP1() {
+        return 3;
     }
 
     @Override
-    public Long sampleAnswerP2() {
+    public Number sampleAnswerP2() {
         return 14L;
     }
 
     @Override
-    public Long part1(Input input) {
+    public Number part1(Input input) {
         var strs = input.twoLists();
         var ranges = strs.one().stream().map(it -> {
             var nums = it.split("-");
@@ -33,11 +35,11 @@ public class Day5 implements Day<Long> {
         var nums = strs.two().stream().map(Long::parseLong)
                 .filter(num -> ranges.stream().anyMatch(range -> range.incRange(num)))
                 .toList();
-        return (long) nums.size();
+        return nums.size();
     }
 
     @Override
-    public Long part2(Input input) {
+    public Number part2(Input input) {
         var strs = input.twoLists();
         var ranges = strs.one().stream().map(it -> {
             var nums = it.split("-");

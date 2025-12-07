@@ -1,21 +1,23 @@
 
+import util.Util;
+
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class Day3 implements Day<Long>{
+public class Day3 implements Day<Number>{
 
     record IndexWithValue(int idx, int value) {
     }
 
-    public Long sampleAnswerP1() {
+    public Number sampleAnswerP1() {
         return 357L;
     }
 
-    public Long sampleAnswerP2() {
+    public Number sampleAnswerP2() {
         return 3121910778619L;
     }
 
-    public Long part1(Input input) {
+    public Number part1(Input input) {
         var joltages = input.linesStream()
                 .map(it -> {
                     var bigLeft = getInteger(it.charAt(0));
@@ -42,7 +44,7 @@ public class Day3 implements Day<Long>{
         return Util.sumInt(joltages).longValue();
     }
 
-    public Long part2(Input input) {
+    public Number part2(Input input) {
         var joltages = input.linesStream()
                 .map(it -> {
                     var size = 12;
