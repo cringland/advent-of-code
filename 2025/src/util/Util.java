@@ -28,6 +28,4 @@ public class Util {
         return chunks;
     }
 
-    public record Point2(int x, int y) {
-    }
 }

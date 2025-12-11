@@ -1,20 +1,11 @@
+import util.Point3;
+import util.SamePair;
 import util.Util;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Day8 implements Day<Number> {
-
-    record Point3(int x, int y, int z) {
-        private double distance(Point3 that) {
-            return Math.sqrt(Math.pow(this.x() - that.x(), 2) + Math.pow(this.y() - that.y(), 2) + Math.pow(this.z() - that.z(), 2));
-        }
-    }
-
-    record EitherPair<T>(T left, T right) {
-    }
 
     @Override
     public Number sampleAnswerP1() {
@@ -33,7 +24,7 @@ public class Day8 implements Day<Number> {
         var amountToSort = sortedPairs.size() <= 1000 ? 10 : 1000;
         for (int i = 0; i < amountToSort; i++) {
             var currentPair = sortedPairs.get(i);
-            var matchedCircuits = circuits.stream().filter(it -> it.contains(currentPair.left) || it.contains(currentPair.right)).toList();
+            var matchedCircuits = circuits.stream().filter(it -> it.contains(currentPair.left()) || it.contains(currentPair.right())).toList();
             if (matchedCircuits.isEmpty()) {
                 circuits.add(new HashSet<>());
                 circuits.getLast().add(currentPair.left());
@@ -45,8 +36,8 @@ public class Day8 implements Day<Number> {
                 circuits.remove(circuit2Idx);
             } else if (matchedCircuits.size() == 1) {
                 var circuit1Idx = circuits.indexOf(matchedCircuits.getFirst());
-                circuits.get(circuit1Idx).add(currentPair.left);
-                circuits.get(circuit1Idx).add(currentPair.right);
+                circuits.get(circuit1Idx).add(currentPair.left());
+                circuits.get(circuit1Idx).add(currentPair.right());
             } else {
                 throw new RuntimeException();
             }
@@ -58,10 +49,7 @@ public class Day8 implements Day<Number> {
 
     @Override
     public Number part2(Input input) {
-        var points = input.linesStream().map(it -> {
-            var strs = it.split(",");
-            return new Point3(Integer.parseInt(strs[0]), Integer.parseInt(strs[1]), Integer.parseInt(strs[2]));
-        }).map(it -> {
+        var points = input.point3s().stream().map(it -> {
             var set = new HashSet<Point3>();
             set.add(it);
             return set;
@@ -73,7 +61,7 @@ public class Day8 implements Day<Number> {
         while(circuits.size() > 1) {
             lastPair = sortedPairs.get(i);
             var currentPair = lastPair;
-            var matchedCircuits = circuits.stream().filter(it -> it.contains(currentPair.left) || it.contains(currentPair.right)).toList();
+            var matchedCircuits = circuits.stream().filter(it -> it.contains(currentPair.left()) || it.contains(currentPair.right())).toList();
             if (matchedCircuits.isEmpty()) {
                 circuits.add(new HashSet<>());
                 circuits.getLast().add(currentPair.left());
@@ -85,28 +73,25 @@ public class Day8 implements Day<Number> {
                 circuits.remove(circuit2Idx);
             } else if (matchedCircuits.size() == 1) {
                 var circuit1Idx = circuits.indexOf(matchedCircuits.getFirst());
-                circuits.get(circuit1Idx).add(currentPair.left);
-                circuits.get(circuit1Idx).add(currentPair.right);
+                circuits.get(circuit1Idx).add(currentPair.left());
+                circuits.get(circuit1Idx).add(currentPair.right());
             } else {
                 throw new RuntimeException();
             }
             i++;
         }
-        return lastPair.left.x * lastPair.right.x;
+        return lastPair.left().x() * lastPair.right().x();
     }
 
-    private List<EitherPair<Point3>> sortedUniquePairs(Input input) {
-        var points = input.linesStream().map(it -> {
-            var strs = it.split(",");
-            return new Point3(Integer.parseInt(strs[0]), Integer.parseInt(strs[1]), Integer.parseInt(strs[2]));
-        }).toList();
-        var pairs = new HashSet<EitherPair<Point3>>();
+    private List<SamePair<Point3>> sortedUniquePairs(Input input) {
+        var points = input.point3s();
+        var pairs = new HashSet<SamePair<Point3>>();
         for (int i = 0; i < points.size(); i++) {
             for (int j = i+1; j < points.size(); j++) {
                 var p1 = points.get(i);
                 var p2 = points.get(j);
                 if (!p1.equals(p2)) {
-                    var pair = new EitherPair<>(p1, p2);
+                    var pair = new SamePair<>(p1, p2);
                     pairs.add(pair);
                 }
             }

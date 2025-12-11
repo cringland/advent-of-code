@@ -1,5 +1,5 @@
-import java.util.ArrayList;
-import java.util.List;
+import util.Point2;
+
 
 public class Day4 implements Day<Number> {
     public Number sampleAnswerP1() {
@@ -56,20 +56,5 @@ public class Day4 implements Day<Number> {
             }
         } while (lastCount!=0);
         return count;
-    }
-
-    record Point2(int x, int y) {
-        public List<Point2> adjacent() {
-            var list = new ArrayList<Point2>();
-            for (int i = -1; i < 2; i++) {
-                for (int j = -1; j < 2; j++) {
-                    if (!(i == 0 && j == 0)) {
-                        list.add(new Point2(x + i, y + j));
-                    }
-                }
-            }
-            return list;
-        }
-
     }
 }

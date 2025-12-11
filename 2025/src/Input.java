@@ -1,3 +1,6 @@
+import util.Point2;
+import util.Point3;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -74,4 +77,13 @@ public class Input {
     public Stream<Character> streamChars() {
         return lines.stream().flatMap(str -> str.chars().mapToObj(c -> (char) c));
     }
+
+    public List<Point2> point2s() {
+        return linesStream().map(Point2::fromString).toList();
+    }
+
+    public List<Point3> point3s() {
+        return linesStream().map(Point3::fromString).toList();
+    }
+
 }

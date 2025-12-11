@@ -11,7 +11,9 @@ public class Runner {
             new Day5(),
             new Day6(),
             new Day7(),
-            new Day8()
+            new Day8(),
+            new Day9(),
+            new Day10()
     );
     private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ISO_LOCAL_TIME;
 
